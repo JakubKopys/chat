@@ -1,0 +1,16 @@
+<!-- NAV -->
+<div class="nav" style="clear:both">
+  <ul>
+    <li class="Logo"><%= link_to 'MyChat',  "/"%></li>
+    <% if user_signed_in? %>
+      <li class="Option"><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+      <li class="Option"><%= link_to 'Settings', edit_user_registration_path %></li>
+      <li class="Option"><%= link_to 'My Profile', current_user %></li>
+      <li class="Option"><%= link_to 'Add post', new_user_post_path(current_user) %></li>
+      <li class="Option"><%= link_to 'Home', authenticated_root_path %></li>
+    <% else %>
+      <li class="Option"><%= link_to 'Sign in', new_user_session_path %></li>
+      <li class="Option"><%= link_to 'Sign up', new_user_registration_path %></li>
+    <% end %>
+  </ul>
+</div>

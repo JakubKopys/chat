@@ -1,0 +1,51 @@
+// Place all the styles related to the posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.posts {
+  width: 30%;
+  margin: 0 auto;
+  .post {
+    display: block;
+    background: white;
+    //border: 1px solid rgb(235, 235, 235);;
+    margin: 15px 0;
+    padding: 12px;
+    -webkit-box-shadow: 0px 0px 2px 1px rgba(191,191,191,1);
+    -moz-box-shadow: 0px 0px 2px 1px rgba(191,191,191,1);
+    box-shadow: 0px 0px 2px 0.5px rgba(191,191,191,1);
+    a.nick{
+      font-weight: bold;
+      text-decoration: none;
+      color: #499DE8;
+    }
+    a.timestamp {
+      color: #2E2F30;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .links {
+      border-top: 1.5px solid #e3e3e3;
+      padding-top: 10px;
+      margin-top: 10px;
+      a {
+        color: #499DE8;
+      }
+    }
+    .top {
+      display: inline-block;
+      margin-bottom: 10px;
+      image.avatar {
+        display: block;
+        float: left;
+      }
+      .text {
+        display: block;
+        float: right;
+        margin-left: 10px;
+      }
+    }
+  }
+}

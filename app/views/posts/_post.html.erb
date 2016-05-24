@@ -1,0 +1,21 @@
+<div class="post post_<%=post.id%>">
+  <div class="top">
+    <%= image_tag post.user.avatar.url(:thumb), class: 'avatar' %>
+    <div class="text">
+    <%= link_to post.user.username, post.user, class: 'nick' %>
+    <br><small><%= link_to post.created_at.strftime('%d %b %y %H:%M'), user_post_path(post.user, post), class: 'timestamp' %></small>
+    </div>
+  </div>
+  <div><%= post.content %></div>
+  <div>
+    <% if post.image.file? %>
+      <%= image_tag post.image.url(:medium) %>
+    <% end %>
+  </div>
+  <div class="links">
+    <% if current_user == post.user %>
+      <small><%= link_to 'Delete', user_post_path(post.user, post), method: :delete %></small>
+      <small><%= link_to 'Edit', edit_user_post_path(post.user, post) %></small>
+    <% end %>
+  </div>
+</div>

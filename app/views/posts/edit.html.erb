@@ -1,0 +1,14 @@
+<div class="new_post clearfix">
+  <%= form_for ([@user, @post]), html: { multipart: true } do |f| %>
+
+      <div class="field">
+        <%= f.text_area :content, class: 'content_area' %>
+      </div>
+
+      <div class="field">
+        <%= f.file_field :image %>
+      </div>
+
+      <%= f.submit 'Edit' %>
+  <% end %>
+</div>

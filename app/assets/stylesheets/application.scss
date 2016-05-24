@@ -1,0 +1,144 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require normalize-rails
+ *= require_tree .
+ *= require_self
+ */
+
+$my-blue: #499DE8;
+.clearfix::before, .clearfix::after {
+  content:"";
+  display:table;
+}
+.clearfix::after {
+  clear:both;
+}
+.clearfix {
+  zoom:1; /* For IE 6/7 (trigger hasLayout) */
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.42857143;
+  color: #333;
+  background: rgb(248, 248, 248);
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px rgb(248, 248, 248) inset;
+  }
+}
+
+// ------------------------ NAV BAR ----------------------------
+.nav {
+  background-color: #333;
+  ul {
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  li.Logo {
+    float: left;
+  }
+
+  li.Option {
+    float: right;
+  }
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    &:hover {
+      background-color: #111;
+    }
+  }
+}
+
+// ------------------------ SIGN IN ----------------------------
+// and other devise forms.
+.signin, .signup, .edit {
+  width: 20%;
+  margin: 0 auto;
+  label {
+    display: inline-block;
+    max-width: 100%;
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  h2 {
+    font-weight: normal;
+    display: block;
+    width: 100%;
+    color: #333;
+    border: 0;
+    font-size: 23px;
+    border-bottom: 1.5px solid lightgray;
+  }
+
+  input[type=text], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 3px 3px;
+    margin-bottom: 10px;
+    border: none;
+    border-bottom: 2px solid $my-blue;
+    background: rgb(248, 248, 248);
+    &:focus {
+      background: white;
+    }
+  }
+
+  input[type=button], input[type=submit], input[type=reset] {
+    background-color: $my-blue;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+
+  a.link {
+    color: $my-blue;
+    font-size: 14px;
+  }
+
+}
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1.5px solid lightgray;
+}
+//-------------------------------------------POSTS-------------------------------
+.new_post {
+  display: block;
+  margin: 0 auto;
+  width: 600px;
+
+
+  textarea.content_area {
+    width: 100%;
+    height: 120px;
+  }
+
+}

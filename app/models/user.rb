@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # This is in addition to a real persisted field like 'username'
   attr_accessor :login
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false }
-  has_attached_file :avatar, styles: { medium: "100x100>", thumb: "40x40" }, default_url: ":style/missing.png"
+  has_attached_file :avatar, styles: { medium: "40x40!", thumb: "30x30!" }, default_url: ":style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   def self.find_for_database_authentication(warden_conditions)

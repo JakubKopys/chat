@@ -1,8 +1,6 @@
-<%= @user.username %>
-<%= image_tag @user.avatar.url(:thumb) %>
+<div class="user posts">
+  <%= @user.username %>
+  <%= image_tag @user.avatar.url(:thumb) %>
 
-<div class="users_posts">
-  <div class="posts">
-    <%= render partial: 'posts/post', collection: @posts %>
-  </div>
+  <%= render partial: 'posts/post', collection: @posts %>
 </div>

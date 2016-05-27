@@ -5,8 +5,11 @@
       <%= f.text_area :content, class: 'content_area' %>
     </div>
 
-    <div class="field">
-      <%= f.file_field :image %>
+    <div class="field avatar_button">
+      <%= f.label :image, class: 'fileContainer' do %>
+          Add image
+          <%= f.file_field :image %>
+      <% end %>
     </div>
 
     <%= f.submit 'Add Post' %>

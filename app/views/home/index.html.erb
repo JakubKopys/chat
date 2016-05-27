@@ -1,4 +1,16 @@
 <div class="home">
+  <div class="friend_list">
+    <ul>
+      <% @users.each do |user| %>
+        <%= link_to user do %>
+          <li>
+            <%= image_tag user.avatar.url(:thumb) %>
+            <span><%= user.username %></span>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
   <div class="posts">
     <%= render partial: 'posts/post', collection: @posts %>
   </div>

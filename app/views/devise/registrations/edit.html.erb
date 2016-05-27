@@ -14,8 +14,11 @@
       <%= f.email_field :email, autofocus: true %>
     </div>
 
-    <div class="field">
+    <div class="field avatar_button">
+      <%= f.label :avatar, class: 'fileContainer' do %>
+      Choose avatar
       <%= f.file_field :avatar %>
+      <% end %>
     </div>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

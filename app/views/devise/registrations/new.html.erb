@@ -14,9 +14,12 @@
       <%= f.email_field :email %>
     </div>
 
-    <div class="field">
-      <%= f.file_field :avatar %>
-    </div>
+      <div class="field avatar_button">
+        <%= f.label :avatar, class: 'fileContainer' do %>
+            Choose avatar
+            <%= f.file_field :avatar %>
+        <% end %>
+      </div>
 
     <div class="field">
       <%= f.label :password %>

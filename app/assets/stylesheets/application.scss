@@ -70,7 +70,7 @@ body {
 
 // ------------------------ SIGN IN ----------------------------
 // and other devise forms.
-.signin, .signup, .edit {
+.signin, .signup, .edit, .new_post {
   width: 20%;
   margin: 0 auto;
   label {
@@ -114,7 +114,47 @@ body {
     cursor: pointer;
     margin-top: 10px;
   }
+  .avatar_button {
+    margin-bottom: 50px;
+  }
+  .fileContainer {
+    overflow: hidden;
+    position: relative;
+  }
 
+  .fileContainer [type=file] {
+    cursor: inherit;
+    display: block;
+    font-size: 999px;
+    filter: alpha(opacity=0);
+    min-height: 100%;
+    min-width: 100%;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+  }
+
+  /* Example stylistic flourishes */
+
+  .fileContainer {
+    background: red;
+    border-radius: .5em;
+    float: left;
+    padding: .5em;
+    background-color: $my-blue;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin: 4px 2px;
+  }
+
+  .fileContainer [type=file] {
+    cursor: pointer;
+  }
 
   a.link {
     color: $my-blue;
@@ -140,5 +180,8 @@ hr {
     width: 100%;
     height: 120px;
   }
+
+
+
 
 }

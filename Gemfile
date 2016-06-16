@@ -18,6 +18,8 @@ gem 'font-awesome-rails', '~> 4.6', '>= 4.6.1.0'
 gem 'heroku', '~> 3.42', '>= 3.42.50'
 gem 'jquery-turbolinks', '~> 2.1'
 gem 'devise', '~> 3.5', '>= 3.5.2'
+gem 'private_pub'
+gem 'thin'
 
 
 group :development, :test do

@@ -1,8 +1,9 @@
 <div class="home">
-  <div class="friend_list">
+
+<div class="friend_list">
     <ul>
       <% @users.each do |user| %>
-        <%= link_to user do %>
+        <%= link_to '#', class: 'start-conversation', 'data-sid' => current_user.id, 'data-rip' => user.id do %>
           <li>
             <%= image_tag user.avatar.url(:thumb) %>
             <span><%= user.username %></span>

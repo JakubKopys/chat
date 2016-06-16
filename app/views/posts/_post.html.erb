@@ -9,7 +9,10 @@
   <div><%= post.content %></div>
   <div>
     <% if post.image.file? %>
-      <%= image_tag post.image.url(:medium) %>
+      <%= link_to post.image.url(:lightbox), class: 'post_thumb' do %>
+        <%= image_tag post.image.url(:medium), id: "image_#{post.id}" %>
+      <% end %>
+      <div class='box'></div>
     <% end %>
   </div>
   <div class="links">

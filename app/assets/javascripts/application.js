@@ -16,7 +16,10 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).ready(function() {
+function ready() {
+
+    $('.add').hide();
+    //display lightbox on image click.
     $(".post_thumb").click(function(e){
         var image_href = $(this).attr("href");
         $(".box").html($('<img>',{class:'added',src:image_href}));
@@ -31,15 +34,41 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
+    //close lightbox after clicking outseide of it.
     $('.backdrop').click(function(){
         close_box();
     });
 
-});
+    //After choosing img to upload change button content to img name.
+    $('#post_image, #user_avatar').change(function(){
+        var name = $(this).val().substr(12);
 
-function close_box()
-{
+        //if statement prevents from showing empty button after canceling file chooser.
+        if (name.length != 0) {
+            $('.tooltip').html($(this).val().substr(12)); // substr(12) gets rid of C:/fakepath/ and leaves name of the file.
+        }
+    });
+
+    //toggle new post form.
+    $(".toggle").click(function(){
+        $(".add").slideToggle(400, function() {
+            if ($(this).is(":visible")) {
+                $(".toggle").html('hide form');
+                $(".toggle").animate({'margin': '0px 0 40px 0'}, 200);
+            } else {
+                $(".toggle").html('Add post');
+                $(".toggle").animate({'margin': '40px 0'}, 200);
+            }
+        });
+    });
+}
+
+function close_box()  {
     $('.backdrop, .box, .added').animate({'opacity':'0'}, 300, 'linear', function(){
         $('.backdrop, .box, .added').css('display', 'none');
     });
 }
+
+//make sure js works despite using turbolinks - page:change and page:load events.
+$(document).on('page:change', ready);
+//$(document).on('page:load', ready);

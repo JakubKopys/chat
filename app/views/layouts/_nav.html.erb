@@ -6,7 +6,6 @@
       <li class="Option"><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
       <li class="Option"><%= link_to 'Settings', edit_user_registration_path %></li>
       <li class="Option"><%= link_to 'My Profile', current_user %></li>
-      <li class="Option"><%= link_to 'Add post', new_user_post_path(current_user) %></li>
       <li class="Option"><%= link_to 'Home', authenticated_root_path %></li>
     <% else %>
       <li class="Option"><%= link_to 'Sign in', new_user_session_path %></li>

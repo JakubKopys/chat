@@ -37,4 +37,18 @@
       }
     }
   }
+  hr {
+    width: 35%;
+  }
+  h2.toggle {
+    text-align: center;
+    font-weight: normal;
+    font-size: 15px;
+    color: #499DE8;
+    text-decoration: underline;
+    margin: 40px 0;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

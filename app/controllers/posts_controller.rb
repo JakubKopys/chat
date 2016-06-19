@@ -1,20 +1,16 @@
 class PostsController < ApplicationController
-before_action :find_user, only: [:new, :create, :index]
+before_action :find_user, only: [:create, :index]
 before_action :find_user_and_post, only: [:show, :edit, :destroy, :update]
 
   def index
     @posts = @user.posts.order('created_at DESC')
   end
 
-  def new
-    @post = @user.posts.new
-  end
-
   def create
-    @post = @user.posts.new post_params
+    @post = @user.posts.build(post_params)
     if @post.save
       flash[:success] = 'Post added.'
-      redirect_to user_post_path(@user, @post)
+      redirect_to authenticated_root_path
     else
       render 'new'
       flash[:notice] = 'Invalid post, try again.'

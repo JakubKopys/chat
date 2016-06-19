@@ -1,17 +1,38 @@
 <div class="home">
 
-<div class="friend_list">
-    <ul>
-      <% @users.each do |user| %>
-        <%= link_to '#', class: 'start-conversation', 'data-sid' => current_user.id, 'data-rip' => user.id do %>
-          <li>
-            <%= image_tag user.avatar.url(:thumb) %>
-            <span><%= user.username %></span>
-          </li>
+  <div class="friend_list">
+      <ul>
+        <% @users.each do |user| %>
+          <%= link_to '#', class: 'start-conversation', 'data-sid' => current_user.id, 'data-rip' => user.id do %>
+            <li>
+              <%= image_tag user.avatar.url(:thumb) %>
+              <span><%= user.username %></span>
+            </li>
+          <% end %>
         <% end %>
-      <% end %>
-    </ul>
+      </ul>
   </div>
+
+  <div class="add">
+    <%= form_for [current_user, Post.new], html: { multipart: true } do |f| %>
+
+        <div class="field">
+          <%= f.text_area :content, class: 'content_area' %>
+        </div>
+
+        <div class="field avatar_button">
+          <%= f.label :image, class: 'fileContainer' do %>
+              <span class="tooltip">Add image</span>
+              <%= f.file_field :image %>
+          <% end %>
+        </div>
+
+        <%= f.submit 'Add Post', id: 'add_post' %>
+    <% end %>
+  </div>
+
+  <h2 class="toggle">Add post</h2>
+
   <div class="posts">
     <%= render partial: 'posts/post', collection: @posts %>
   </div>

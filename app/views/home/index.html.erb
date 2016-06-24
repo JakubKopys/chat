@@ -13,8 +13,8 @@
       </ul>
   </div>
 
-  <div class="add">
-    <%= form_for [current_user, Post.new], html: { multipart: true } do |f| %>
+  <div class="add clearfix">
+    <%= form_for [current_user, Post.new], html: { multipart: true }, remote: true do |f| %>
 
         <div class="field">
           <%= f.text_area :content, class: 'content_area' %>
@@ -25,6 +25,8 @@
               <span class="tooltip">Add image</span>
               <%= f.file_field :image %>
           <% end %>
+          <div><img id="image_upload_preview" /></div>
+
         </div>
 
         <%= f.submit 'Add Post', id: 'add_post' %>

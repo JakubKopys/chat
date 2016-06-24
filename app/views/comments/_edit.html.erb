@@ -1,0 +1,10 @@
+<div class="edit_comment edit_<%=@comment.id%>">
+  <%= form_for [@user, @post, @comment], remote: true do |f| %>
+
+      <div class="field">
+        <%= f.text_area :content, class: 'comment_area'  %>
+      </div>
+
+      <%= f.submit 'Edit', class: 'add_comment' %>
+  <% end %>
+</div>

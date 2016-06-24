@@ -1,0 +1,7 @@
+<span class="unlike">
+  <span class="unlike_<%= comment.id %>">
+    <%= link_to like_user_post_comment_path(current_user, comment.post, comment), method: 'post', remote: true do %>
+      <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+    <% end %>
+  </span>
+</span>

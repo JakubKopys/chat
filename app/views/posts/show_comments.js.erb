@@ -1,0 +1,2 @@
+$('.comments_<%= @post.id %>').html("<%= escape_javascript(render @post.comments) %>");
+$('.more_<%= @post.id%>').remove();

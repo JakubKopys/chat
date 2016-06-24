@@ -1,0 +1,33 @@
+<div class="com_content_<%=comment.id%>">
+  <%= link_to " #{comment.user.username }", comment.user, class: 'commenter' %>
+  <span class="com_content"><%= comment.content %></span><br>
+      <div class="authorized_links">
+        <% if current_user == comment.user %>
+        <span>
+          <%= link_to edit_user_post_comment_path(comment.user, comment.post, comment), class: "edit", remote: true do %>
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          <% end %>
+        </span>
+        <span>
+          <%= link_to user_post_comment_path(comment.user, comment.post, comment), method: :delete, class: "delete" do %>
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          <% end %>
+        </span>
+        <% end %>
+        <small id="time"><%= time_ago_in_words(comment.created_at) %> ago.</small>
+        <div class="likes">
+          <% if !current_user.likes?(comment) %>
+            <span class="like_<%= comment.id %>">
+              <%= render 'comments/like', comment: comment %>
+            </span>
+          <% else %>
+            <span class="unlike_<%= comment.id %>">
+              <%= render 'comments/unlike', comment: comment %>
+            </span>
+          <% end %>
+          <span class="likers" id="likers_<%= comment.id %>">
+            <%= comment.likes.size %>
+          </span>
+        </div>
+      </div>
+</div>

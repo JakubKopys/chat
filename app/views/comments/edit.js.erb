@@ -1,0 +1,1 @@
+$('.com_content_<%=@comment.id%>').html('<%= escape_javascript(render 'comments/edit', user: @user, post: @comment.post, comment: @comment)%>');

@@ -2,7 +2,17 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users do
-    resources :posts
+    resources :posts do
+      resources :comments, :only => [:show, :create, :delete, :destroy, :edit, :update] do
+        member do
+          post 'like'
+        end
+      end
+      member do
+        get 'show_comments'
+        post 'like'
+      end
+    end
   end
 
   devise_scope :user do
@@ -14,10 +24,6 @@ Rails.application.routes.draw do
     unauthenticated do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
-  end
-
-  resources :conversations do
-    resources :messages
   end
 
 end

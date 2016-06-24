@@ -12,15 +12,17 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require private_pub
 //= require turbolinks
 //= require_tree .
 
 function ready() {
 
-    $('.add').hide();
     //display lightbox on image click.
-    $(".post_thumb").click(function(e){
+    //$(".post_thumb").click(function(e){
+    // event delegation to attach events for dynamically loaded elements !!!
+    $(this).on('click','.post_thumb', function(e){
         var image_href = $(this).attr("href");
         $(".box").html($('<img>',{class:'added',src:image_href}));
         var img = document.getElementsByClassName('added');
@@ -35,7 +37,7 @@ function ready() {
     });
 
     //close lightbox after clicking outseide of it.
-    $('.backdrop').click(function(){
+    $(this).on('click','.backdrop', function(){
         close_box();
     });
 
@@ -49,6 +51,8 @@ function ready() {
         }
     });
 
+    $('.add').hide();
+
     //toggle new post form.
     $(".toggle").click(function(){
         $(".add").slideToggle(400, function() {
@@ -58,9 +62,41 @@ function ready() {
             } else {
                 $(".toggle").html('Add post');
                 $(".toggle").animate({'margin': '40px 0'}, 200);
+                $("ul#notice li").animate({'opacity': '0'}, 400, function() {
+                    $("ul#notice").html('');
+                });
             }
         });
     });
+
+    //img preview
+    $('#post_image').on('change', function () {
+        readURL(this);
+    });
+
+    $(this).delegate('.comment_area', 'keydown', function(e) {
+        if(e.which == 13) {
+            var h = $(this).height();
+            var H = h += 20;
+            var Hh = H.toString();
+            $(this).css('height', Hh);
+        }
+    });
+
+
+}
+
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#image_upload_preview').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
 }
 
 function close_box()  {
@@ -68,7 +104,5 @@ function close_box()  {
         $('.backdrop, .box, .added').css('display', 'none');
     });
 }
-
 //make sure js works despite using turbolinks - page:change and page:load events.
 $(document).on('page:change', ready);
-//$(document).on('page:load', ready);

@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_many :posts
+  has_many :comments
+  has_many :likes
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -19,6 +21,11 @@ class User < ActiveRecord::Base
     elsif conditions.has_key?(:username) || conditions.has_key?(:email)
       where(conditions.to_hash).first
     end
+  end
+
+  # Returns true when the user likes post.
+  def likes?(likeable)
+    Like.find_by(likeable: likeable, user: self, like: true)
   end
 
 end

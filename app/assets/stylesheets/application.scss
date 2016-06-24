@@ -11,9 +11,11 @@
  * file per style scope.
  *
  *= require normalize-rails
+ *= require font-awesome
  *= require_tree .
  *= require_self
  */
+@import "font-awesome";
 
 $my-blue: #499DE8;
 .clearfix::before, .clearfix::after {
@@ -31,6 +33,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.42857143;
   color: #333;
+  height: 100%;
   background: rgb(248, 248, 248);
   input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px rgb(248, 248, 248) inset;
@@ -125,6 +128,7 @@ body {
     font-weight: bold;
     font-size: 14px;
     margin-top: -5px;
+    float: left;
   }
 
   .fileContainer [type=file] {
@@ -178,10 +182,10 @@ hr {
   display: block;
   margin: 0 auto;
   width: 600px;
-
+  margin-top: 55px;
   textarea.content_area {
     width: 100%;
-    height: 120px;
+    height: 80px;
     resize: none;
   }
 
@@ -225,3 +229,79 @@ hr {
   margin-right:6px;
   cursor:pointer;
 }
+
+//--------------------------------------FLASHES-------------------------------------------
+ul#notice{
+  position: absolute;
+  top: 5%;
+  left: 35%;
+  list-style: none;
+  text-align: center;
+  width: 30%;
+  display: block;
+  margin: 10px auto 10px auto;
+  padding: 10px 5px;
+  opacity: 0;
+  li {
+    background: #FF3838;
+    color: lighten(#FF9494, 15%);
+    padding: 5px 0;
+    border-radius: 10px;
+  }
+}
+ul#comment_error{
+  position: fixed;
+  top: 5%;
+  left: 35%;
+  list-style: none;
+  text-align: center;
+  width: 30%;
+  display: block;
+  margin: 10px auto 10px auto;
+  padding: 10px 5px;
+  opacity: 0;
+  li {
+    background: #FF3838;
+    color: lighten(#FF9494, 15%);
+    padding: 5px 0;
+    border-radius: 10px;
+  }
+}
+
+//-------------------------------------thumb img-------------------
+#image_upload_preview {
+  width: 200px;
+  float: right;
+}
+//---------------------------------------AUTHORIZED-LINKS-------------------------------------
+.authorized_links {
+  //margin-bottom: -20px;
+  font-size: 12px;
+  float: right;
+  a {
+    text-decoration: none;
+
+  }
+  a.edit {
+    color: #499DE8;
+    opacity: 0;
+
+  }
+  a.delete {
+    margin-left: 10px;
+    margin-right: 10px;
+    opacity: 0;
+    color: red;
+  }
+  .likes {
+    font-size: 14px;
+    margin-left: 15px;
+    a {
+      color: #499DE8;
+      text-decoration: underline;
+    }
+  }
+}
+
+.comment:hover .authorized_links a.edit { opacity:1; }
+.comment:hover .authorized_links a.delete { opacity:1; }

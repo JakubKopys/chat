@@ -13,9 +13,18 @@
 <%= render 'layouts/nav' %>
 <div class="container">
 
+  <!--
   <div class="flashes">
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+  </div>
+  -->
+  <div class="flashes">
+    <% flash.each do |key, value| %>
+        <%= content_tag :div, value, class: "flash #{key}" %>
+    <% end %>
+    <ul id="notice"></ul>
+    <ul id="comment_error"></ul>
   </div>
   <%= yield %>
 </div>

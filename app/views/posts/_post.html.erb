@@ -1,4 +1,4 @@
-<div class="post post_<%=post.id%>">
+<div class="post post_<%= post.id%>">
   <div class="top">
     <%= image_tag post.user.avatar.url(:medium), class: 'avatar' %>
     <div class="text">
@@ -6,7 +6,7 @@
     <br><small><%= link_to post.created_at.strftime('%d %b %Y %H:%M'), user_post_path(post.user, post), class: 'timestamp' %></small>
     </div>
   </div>
-  <div><%= post.content %></div>
+  <div class="post_content"><%= post.content %></div>
   <div>
     <% if post.image.file? %>
       <%= link_to post.image.url(:lightbox), class: 'post_thumb' do %>
@@ -20,5 +20,28 @@
       <small><%= link_to 'Delete', user_post_path(post.user, post), method: :delete %></small>
       <small><%= link_to 'Edit', edit_user_post_path(post.user, post) %></small>
     <% end %>
+    <% if post.comments.count > 3 %>
+      <small><%= link_to "More comments(#{post.comments.count})", show_comments_user_post_path(post.user, post), class: "more_comments more_#{post.id}", remote: true %></small>
+    <% end %>
+    <div class="likes">
+      <% if !current_user.likes?(post) %>
+        <span class="like_<%= post.id %>">
+          <%= render 'posts/like', post: post %>
+        </span>
+      <% else %>
+        <span class="unlike_<%= post.id %>">
+          <%= render 'posts/unlike', post: post %>
+        </span>
+      <% end %>
+      <span class="likers" id="likers_<%= post.id %>">
+        (<%= pluralize( post.likes.size, "like") %>)
+      </span>
+    </div>
+  </div>
+  <div class="comments">
+    <div class="comments_<%= post.id %>">
+      <%= render post.comments.order(' likes_count DESC, created_at DESC').limit(3) %>
+    </div>
+    <%= render 'comments/new', post: post %>
   </div>
 </div>

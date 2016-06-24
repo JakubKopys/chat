@@ -5,7 +5,9 @@
 .posts {
   width: 30%;
   margin: 0 auto;
+  height: 100%;
   .post {
+    word-wrap: break-word; //force looooooong words fit in boxes;
     display: block;
     background: white;
     margin: 15px 0;
@@ -29,6 +31,7 @@
       border-top: 1.5px solid #e3e3e3;
       padding-top: 10px;
       margin-top: 10px;
+      margin-bottom: 10px;
       a {
         color: #499DE8;
       }
@@ -47,6 +50,105 @@
         small a {
           color: #636363;
         }
+      }
+    }
+    .comments {
+      height: 100%;
+      margin-top: 23px;
+      #comment {
+        padding: 0 15px 5px 15px;
+        margin-bottom: 5px;
+        font-size: 14px;
+        span {
+          text-align: right;
+        }
+        a.commenter {
+          text-decoration: none;
+          color: #499DE8;
+          font-weight: bold;
+          float: left;
+        }
+        .comment_avatar {
+          float: left;
+          padding-right: 5px;
+        }
+        .com_content {
+          padding-left: 5px;
+
+        }
+      }
+      .new_comment {
+        .comment_avatar {
+          float: left;
+          margin: 0 10px 0px 15px;
+        }
+        .comment_area {
+          width: 65%;
+          height: 25px;
+          resize: none;
+          float: left;
+          font-size: 14px;
+          border: 1px solid darken(#e3e3e3,10%);
+          //background: lighten(#EFEFEF, 2%);
+          border-radius: 3px;
+          color: #333;
+          &:focus {
+            border: 1px solid #999;
+          }
+        }
+        .add_comment {
+          float: left;
+          margin-left: 15px;
+        }
+        input[type=button], input[type=submit], input[type=reset] {
+          background-color: #499DE8;
+          border: none;
+          color: white;
+          padding: 4px 12px;
+          text-decoration: none;
+          border-radius: 4px;
+          cursor: pointer;
+          margin-top: 0;
+        }
+      }
+    }
+    .edit_comment {
+      .comment_area {
+        width: 355px;
+        margin-left: 5px;
+        height: 25px;
+        resize: none;
+        float: left;
+        font-size: 14px;
+        margin-right: 15px;
+        border: 1px solid darken(#e3e3e3,10%);
+        border-radius: 3px;
+        overflow:hidden;
+        color: #333;
+        &:focus {
+          border: 1px solid #999;
+        }
+      }
+      .new_comment {
+        float: left;
+        margin-left: 15px;
+      }
+      input[type=button], input[type=submit], input[type=reset] {
+        background-color: #499DE8;
+        border: none;
+        color: white;
+        padding: 4px 12px;
+        text-decoration: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 0;
+      }
+    }
+    .likes {
+      float: right;
+      font-size: 14px;
+      a {
+        text-decoration: none;
       }
     }
   }

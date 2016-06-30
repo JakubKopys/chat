@@ -1,6 +1,13 @@
 <div class="com_content_<%=comment.id%>">
   <%= link_to " #{comment.user.username }", comment.user, class: 'commenter' %>
   <span class="com_content"><%= comment.content %></span><br>
+  <div>
+    <% if comment.image.file? %>
+        <%= link_to comment.image.url(:lightbox), class: 'post_thumb' do %>
+            <%= image_tag comment.image.url(:medium), id: "com_img com_img_#{comment.id}" %>
+        <% end %>
+    <% end %>
+  </div>
       <div class="authorized_links">
         <% if current_user == comment.user %>
         <span>
@@ -25,7 +32,7 @@
               <%= render 'comments/unlike', comment: comment %>
             </span>
           <% end %>
-          <span class="likers" id="likers_<%= comment.id %>">
+          <span class="comment_likers_<%=comment.id%>">
             <%= comment.likes.size %>
           </span>
         </div>

@@ -1,9 +1,18 @@
 <div class="add_comment clearfix">
-  <%= form_for [current_user, post, Comment.new], remote: true  do |f| %>
+  <%= form_for [current_user, post, Comment.new], html: { multipart: true }, remote: true do |f| %>
       <%= link_to image_tag(current_user.avatar(:thumb)), current_user, class: 'comment_avatar' %>
-      <p>
+      <div class="field">
         <%= f.text_area :content, class: 'comment_area' %>
-      </p>
-      <%= f.submit 'Comment', class: 'add_comment' %>
+      </div>
+      <div class="field avatar_button">
+        <%= f.label :image, class: 'fileContainer' do %>
+            <i class="fa fa-camera tooltip" aria-hidden="true"></i>
+            <%= f.file_field :image, class: "img_com_upl img_#{post.id}" %>
+        <% end %>
+      </div>
+      <%= f.button :submit, class: 'add_comment' do %>
+        <i class="fa fa-share-square-o" aria-hidden="true"></i>
+      <% end %>
   <% end %>
+  <div class="comment_img_preview"><img class="img_<%=post.id%>"/></div>
 </div>

@@ -2,9 +2,6 @@
   $("ul#notice").css('opacity', '0');
   $("ul#notice").html(''); // clear earlier flash messages if any.
   $('.posts').prepend("<%= escape_javascript(render @post) %>");
-  $('.tooltip').html('Add image');
-  $('.content_area').val('');
-  $('#image_upload_preview').attr('src', '');
 <% else %>
   $("ul#notice").html(''); // clear earlier flash messages if any.
   <% if @post.errors.any? %>
@@ -13,6 +10,8 @@
     <% end %>
   <% end %>
   $("ul#notice").css('opacity', '1');
-  $('.tooltip').html('Add image');
-  $('.content_area').val('');
 <% end %>
+
+$('.image_upload_preview').removeAttr('src');
+$('.add .tooltip').html('Add image');
+$('.content_area').val('');

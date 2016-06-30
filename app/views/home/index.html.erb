@@ -23,9 +23,9 @@
         <div class="field avatar_button">
           <%= f.label :image, class: 'fileContainer' do %>
               <span class="tooltip">Add image</span>
-              <%= f.file_field :image %>
+              <%= f.file_field :image, class: 'post_image' %>
           <% end %>
-          <div><img id="image_upload_preview" /></div>
+          <div><img class="image_upload_preview" /></div>
 
         </div>
 

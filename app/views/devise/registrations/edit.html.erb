@@ -20,6 +20,7 @@
       <%= f.file_field :avatar %>
       <% end %>
     </div>
+    <%= image_tag resource.avatar.url(:big), id: "avatar_preview" %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>

@@ -1,5 +1,5 @@
 <span class="like">
-  <span class="like_<%= comment.id %>">
+  <span class="comment_like_<%= comment.id %>">
     <%= link_to like_user_post_comment_path(current_user, comment.post , comment), method: 'post', remote: true do %>
       <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
     <% end %>

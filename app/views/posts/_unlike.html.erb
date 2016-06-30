@@ -1,5 +1,5 @@
 <span class="unlike">
-  <span class="unlike_<%= post.id %>">
+  <span class="post_unlike_<%= post.id %>">
     <%= link_to like_user_post_path(current_user, post, like: false), method: 'post', remote: true do %>
       Unlike <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
     <% end %>

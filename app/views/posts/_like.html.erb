@@ -1,5 +1,5 @@
 <span class="like">
-  <span class="like_<%= post.id %>">
+  <span class="post_like_<%= post.id %>">
     <%= link_to like_user_post_path(current_user, post, like: true), method: 'post', remote: true do %>
       Like <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
     <% end %>

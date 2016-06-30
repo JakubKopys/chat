@@ -40,21 +40,22 @@ function ready() {
     $(this).on('click','.backdrop', function(){
         close_box();
     });
-
-    //After choosing img to upload change button content to img name.
-    $('#post_image, #user_avatar').change(function(){
+    
+    // delegate so it works after post form change afterr invalid submission.
+    $(this).delegate('.post_image, #user_avatar', 'change', function(){
         var name = $(this).val().substr(12);
 
         //if statement prevents from showing empty button after canceling file chooser.
         if (name.length != 0) {
-            $('.tooltip').html($(this).val().substr(12)); // substr(12) gets rid of C:/fakepath/ and leaves name of the file.
+            $('.add .tooltip').html($(this).val().substr(12)); // substr(12) gets rid of C:/fakepath/ and leaves name of the file.
         }
+        readURL(this);
     });
 
     $('.add').hide();
 
     //toggle new post form.
-    $(".toggle").click(function(){
+    $(".toggle").on('click', function(){
         $(".add").slideToggle(400, function() {
             if ($(this).is(":visible")) {
                 $(".toggle").html('hide form');
@@ -69,9 +70,11 @@ function ready() {
         });
     });
 
-    //img preview
-    $('#post_image').on('change', function () {
-        readURL(this);
+
+    //delegate - works with dynamically added posts
+    $(this).delegate('.img_com_upl', 'change', function() {
+        var className = $(this).attr('class').substr(12);
+        readURL_comment(this, className);
     });
 
     $(this).delegate('.comment_area', 'keydown', function(e) {
@@ -83,7 +86,6 @@ function ready() {
         }
     });
 
-
 }
 
 
@@ -92,12 +94,23 @@ function readURL(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#image_upload_preview').attr('src', e.target.result);
+            $('.image_upload_preview, #avatar_preview').attr('src', e.target.result);
         };
 
         reader.readAsDataURL(input.files[0]);
     }
 }
+function readURL_comment(input, className) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('.'+className).attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 
 function close_box()  {
     $('.backdrop, .box, .added').animate({'opacity':'0'}, 300, 'linear', function(){

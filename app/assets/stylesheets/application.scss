@@ -269,9 +269,17 @@ ul#comment_error{
 }
 
 //-------------------------------------thumb img-------------------
-#image_upload_preview {
+.image_upload_preview {
   width: 200px;
   float: right;
+}
+.comment_img_preview {
+  img {
+    width: 200px;
+    float: left;
+    margin-top: 10px;
+    padding-left: 20px;
+  }
 }
 //---------------------------------------AUTHORIZED-LINKS-------------------------------------
 .authorized_links {

@@ -1,8 +1,6 @@
 <% if @comment.errors.empty? %>
   $("ul#comment_error").html('');
   $('.comments_<%= @comment.post.id %>').append("<%= escape_javascript(render @comment) %>");
-  $('.comment_area').val('');
-  $('.comment_area').css('height', '25px');
 <% else %>
   $("ul#comment_error").html(''); // clear earlier flash messages if any.
   <% if @comment.errors.any? %>
@@ -12,6 +10,8 @@
   <% end %>
   $("ul#comment_error").css('opacity', '1');
   $("#comment_error").delay(3200).animate({'opacity': '0'}, 400);
-  $('.tooltip').html('Add image');
-  $('.content_area').val('');
 <% end %>
+
+$('.comment_area').val('');
+$('.comment_area').css('height', '25px');
+$('.comment_img_preview img').attr('src', '');

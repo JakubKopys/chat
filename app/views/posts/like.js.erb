@@ -1,7 +1,7 @@
 <% if Like.find_by(likeable: @post, user: @user) %>
-  $(".like_<%= @post.id %>").html("<%= escape_javascript(render 'posts/unlike', user: @user, post: @post) %>");
+  $(".post_like_<%= @post.id %>").html("<%= escape_javascript(render 'posts/unlike', user: @user, post: @post) %>");
 <% else %>
-  $(".unlike_<%= @post.id %>").html("<%= escape_javascript(render 'posts/like', user: @user, post: @post) %>");
+  $(".post_unlike_<%= @post.id %>").html("<%= escape_javascript(render 'posts/like', user: @user, post: @post) %>");
 <% end %>
 
 $("#likers_<%= @post.id %>").html(" (<%= pluralize( @post.likes.count, "like") %>) ");

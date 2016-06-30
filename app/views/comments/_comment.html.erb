@@ -1,6 +1,6 @@
 <%= div_for comment do %>
     <div id="comment" class="clearfix">
       <%= link_to image_tag(comment.user.avatar(:thumb)), comment.user, class: 'comment_avatar' %>
-      <%= render 'comments/content', comment: comment %>
+      <div id="comment_content"><%= render 'comments/content', comment: comment %></div>
     </div>
 <% end %>

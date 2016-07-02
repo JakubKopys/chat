@@ -1,1 +1,4 @@
-$('.edit_<%=@comment.id%>').html('<%= escape_javascript(render 'comments/content', comment: @comment) %>');
+$('.comment_<%=@comment.id%>').replaceWith('<%= escape_javascript(render 'comments/comment', comment: @comment) %>');
+<% if @comment.root? %>
+   $('.replies_<%=@comment.id%>').hide();
+<% end %>

@@ -40,18 +40,6 @@ function ready() {
     $(this).on('click','.backdrop', function(){
         close_box();
     });
-    
-    // delegate so it works after post form change afterr invalid submission.
-    $(this).delegate('.post_image, #user_avatar', 'change', function(){
-        var name = $(this).val().substr(12);
-
-        //if statement prevents from showing empty button after canceling file chooser.
-        if (name.length != 0) {
-            $('.add .tooltip').html($(this).val().substr(12)); // substr(12) gets rid of C:/fakepath/ and leaves name of the file.
-        }
-        readURL(this);
-    });
-
 
     $('.add').hide();
     $('.replies').hide();
@@ -74,20 +62,16 @@ function ready() {
     });
 
 
-    //delegate - works with dynamically added posts
-    $(this).delegate('.img_com_upl, .comment_image', 'change', function() {
-        var className = $(this).attr('class').substr(12);
-        readURL_comment(this, className);
-    });
-
-    $(this).delegate('.comment_area', 'keydown', function(e) {
-        if(e.which == 13) {
-            var h = $(this).height();
-            var H = h += 20;
-            var Hh = H.toString();
-            $(this).css('height', Hh);
-        }
-    });
+    if ($('.pagination').length) {
+        $(window).scroll(function() {
+            var url = $('.pagination .next_page').attr('href');
+            if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {
+                $('.pagination').text("Please Wait...");
+                return $.getScript(url);
+            }
+        });
+        return $(window).scroll();
+    }
 
 }
 
@@ -127,4 +111,31 @@ $(document).delegate('.toggle_replies', 'click', function(e) {
     e.preventDefault();
     var data_id = $(this).data('id');
     $('.replies_'+data_id).toggle();
+});
+
+$(document).delegate('.comment_area', 'keydown', function(e) {
+    if(e.which == 13) {
+        var h = $(this).height();
+        var H = h += 20;
+        var Hh = H.toString();
+        $(this).css('height', Hh);
+    }
+});
+
+//delegate - works with dynamically added posts
+$(document).delegate('.img_com_upl, .comment_image', 'change', function() {
+    var className = $(this).attr('class').substr(12);
+    readURL_comment(this, className);
+});
+
+
+// delegate so it works after post form change afterr invalid submission.
+$(document).delegate('.post_image, #user_avatar', 'change', function(){
+    var name = $(this).val().substr(12);
+
+    //if statement prevents from showing empty button after canceling file chooser.
+    if (name.length != 0) {
+        $('.add .tooltip').html($(this).val().substr(12)); // substr(12) gets rid of C:/fakepath/ and leaves name of the file.
+    }
+    readURL(this);
 });

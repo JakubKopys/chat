@@ -22,6 +22,7 @@ gem 'thin'
 gem 'font-awesome-rails', '~> 4.6', '>= 4.6.3.0'
 gem 'remotipart', '~> 1.2', '>= 1.2.1'
 gem 'ancestry', '~> 2.1'
+gem 'will_paginate', '~> 3.1'
 
 
 group :development, :test do

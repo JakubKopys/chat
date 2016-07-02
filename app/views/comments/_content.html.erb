@@ -21,6 +21,9 @@
           <% end %>
         </span>
         <% end %>
+        <% if comment.root? %>
+          <%= link_to "replies (#{children_count(comment)})", '#', class: 'toggle_replies', data: {id: comment.id} %>
+        <% end %>
         <small id="time"><%= time_ago_in_words(comment.created_at) %> ago.</small>
         <div class="likes">
           <% if !current_user.likes?(comment) %>
@@ -37,4 +40,15 @@
           </span>
         </div>
       </div>
+
+  <div class="replies replies_<%=comment.id%>">
+    <% if comment.has_children? %>
+      <% comment.children.each do |com| %>
+        <div class="reply"><%= render com, post: comment.post %></div>
+      <% end %>
+    <% end %>
+    <% if comment.root? %>
+      <%= render 'comments/new_reply', post: comment.post, comment: comment %>
+    <% end %>
+  </div>
 </div>

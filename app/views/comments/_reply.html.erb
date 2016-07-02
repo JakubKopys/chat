@@ -1,0 +1,59 @@
+<%= div_for comment do %>
+    <div id="comment" class="clearfix">
+      <%= link_to image_tag(comment.user.avatar(:thumb)), comment.user, class: 'comment_avatar' %>
+      <div id="comment_content">
+        <div class="com_content_<%=comment.id%>">
+          <%= link_to " #{comment.user.username }", comment.user, class: 'commenter' %>
+          <span class="com_content"><%= comment.content %></span><br>
+          <div>
+            <% if comment.image.file? %>
+                <%= link_to comment.image.url(:lightbox), class: 'post_thumb' do %>
+                    <%= image_tag comment.image.url(:medium), id: "com_img com_img_#{comment.id}" %>
+                <% end %>
+            <% end %>
+          </div>
+          <div class="authorized_links">
+            <% if current_user == comment.user %>
+          <span>
+            <%= link_to edit_user_post_comment_path(comment.user, comment.post, comment), class: "edit", remote: true do %>
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            <% end %>
+          </span>
+          <span>
+            <%= link_to user_post_comment_path(comment.user, comment.post, comment), method: :delete, class: "delete" do %>
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            <% end %>
+          </span>
+            <% else %>
+            <span>
+              <%= link_to 'reply', new_user_post_comment_path(current_user, comment.post, parent_id: comment), class: "reply_link #{comment.id}" %>
+            </span>
+            <% end %>
+            <small id="time"><%= time_ago_in_words(comment.created_at) %> ago.</small>
+            <div class="likes">
+              <% if !current_user.likes?(comment) %>
+              <span class="like_<%= comment.id %>">
+                <%= render 'comments/like', comment: comment %>
+              </span>
+              <% else %>
+              <span class="unlike_<%= comment.id %>">
+                <%= render 'comments/unlike', comment: comment %>
+              </span>
+              <% end %>
+              <span class="comment_likers_<%=comment.id%>">
+              <%= comment.likes.size %>
+            </span>
+            </div>
+          </div>
+
+          <div class="replies replies_<%=comment.id%>">
+            <% if comment.has_children? %>
+                <% comment.children.each do |com| %>
+                    <%= render com, post: comment.post %>
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>

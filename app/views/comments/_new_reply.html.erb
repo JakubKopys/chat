@@ -1,5 +1,5 @@
-<div class="add_comment clearfix">
-  <%= form_for [current_user, post, Comment.new], html: { multipart: true }, remote: true do |f| %>
+<div class="add_reply clearfix">
+  <%= form_for [current_user, post, Comment.new(parent_id: comment.id)], html: { multipart: true }, remote: true do |f| %>
       <%= f.hidden_field :parent_id %>
       <%= link_to image_tag(current_user.avatar(:thumb)), current_user, class: 'comment_avatar' %>
       <div class="field">
@@ -11,8 +11,8 @@
             <%= f.file_field :image, class: "img_com_upl img_#{post.id}" %>
         <% end %>
       </div>
-      <%= f.button :submit, class: 'add_comment' do %>
-        <i class="fa fa-share-square-o" aria-hidden="true"></i>
+      <%= f.button :submit, class: 'submit_reply' do %>
+          <i class="fa fa-share-square-o" aria-hidden="true"></i>
       <% end %>
   <% end %>
   <div class="comment_img_preview"><img class="img_<%=post.id%>"/></div>

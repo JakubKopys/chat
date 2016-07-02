@@ -60,7 +60,10 @@
         margin-bottom: 5px;
         font-size: 14px;
         #comment_content {
-          overflow:auto;
+          overflow: hidden;
+          .replies {
+            opacity: 1;
+          }
         }
         a.commenter {
           text-decoration: none;
@@ -144,6 +147,7 @@
         cursor: pointer;
         margin-top: 0;
       }
+
     }
     .likes {
       float: right;
@@ -216,5 +220,19 @@
 
   .fileContainer [type=file] {
     cursor: pointer;
+  }
+}
+
+a.toggle_replies {
+  color: #499DE8;
+}
+
+.edit_comment {
+  input[type=submit] {
+    margin-left: 5px !important;
+    margin-top: 5px;
+  }
+  .fileContainer [type=file], label {
+    margin-left: -10px !important;
   }
 }

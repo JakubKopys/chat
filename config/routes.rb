@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :posts do
-      resources :comments, :only => [:show, :create, :delete, :destroy, :edit, :update] do
+      resources :comments, :only => [:show, :create, :delete, :destroy, :edit, :update, :new] do
         member do
           post 'like'
         end

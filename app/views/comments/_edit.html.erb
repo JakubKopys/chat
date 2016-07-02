@@ -1,10 +1,21 @@
-<div class="edit_comment edit_<%=@comment.id%>">
+<div class="add_comment edit_<%=@comment.id%> edit_comment">
   <%= form_for [@user, @post, @comment], remote: true do |f| %>
 
       <div class="field">
         <%= f.text_area :content, class: 'comment_area'  %>
       </div>
 
+      <div class="field avatar_button">
+        <%= f.label :image, class: 'fileContainer' do %>
+            <i class="fa fa-camera tooltip" aria-hidden="true"></i>
+            <%= f.file_field :image, class: "img_com_upl edit_#{post.id}" %>
+        <% end %>
+      </div>
       <%= f.submit 'Edit', class: 'add_comment' %>
+      <% if @comment.image.file? %>
+        <%= image_tag @comment.image.url(:thumb), class: "edit_img_preview edit_#{post.id}" %>
+      <% else %>
+        <div class="comment_img_preview"><img class="edit_img_preview edit_<%=post.id%>"/></div>
+      <% end %>
   <% end %>
 </div>

@@ -273,6 +273,7 @@ ul#comment_error{
   width: 200px;
   float: right;
 }
+
 .comment_img_preview {
   img {
     width: 200px;
@@ -281,6 +282,12 @@ ul#comment_error{
     padding-left: 20px;
   }
 }
+
+img.edit_img_preview {
+    width: 200px;
+    margin-top: 10px;
+    padding-left: 20px;
+}
 //---------------------------------------AUTHORIZED-LINKS-------------------------------------
 .authorized_links {
   //margin-bottom: -20px;
@@ -288,7 +295,8 @@ ul#comment_error{
   float: right;
   a {
     text-decoration: none;
-
+    position: relative;
+    z-index: 1;
   }
   a.edit {
     color: #499DE8;

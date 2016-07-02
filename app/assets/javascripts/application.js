@@ -52,7 +52,10 @@ function ready() {
         readURL(this);
     });
 
+
     $('.add').hide();
+    $('.replies').hide();
+
 
     //toggle new post form.
     $(".toggle").on('click', function(){
@@ -72,7 +75,7 @@ function ready() {
 
 
     //delegate - works with dynamically added posts
-    $(this).delegate('.img_com_upl', 'change', function() {
+    $(this).delegate('.img_com_upl, .comment_image', 'change', function() {
         var className = $(this).attr('class').substr(12);
         readURL_comment(this, className);
     });
@@ -119,3 +122,9 @@ function close_box()  {
 }
 //make sure js works despite using turbolinks - page:change and page:load events.
 $(document).on('page:change', ready);
+
+$(document).delegate('.toggle_replies', 'click', function(e) {
+    e.preventDefault();
+    var data_id = $(this).data('id');
+    $('.replies_'+data_id).toggle();
+});

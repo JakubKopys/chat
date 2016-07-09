@@ -1,6 +1,14 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
+    if params[:friends]
+      @users = User.find(params[:friends]).unaccepted_friends
+    else
+      @users = User.all
+    end
+
+    if params[:search]
+      @users = User.username_like("%#{params[:search]}%")
+    end
   end
 
   def show

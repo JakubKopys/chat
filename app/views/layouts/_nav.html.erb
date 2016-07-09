@@ -3,10 +3,53 @@
   <ul>
     <li class="Logo"><%= link_to 'MyChat',  "/"%></li>
     <% if user_signed_in? %>
-      <li class="Option"><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
-      <li class="Option"><%= link_to 'Settings', edit_user_registration_path %></li>
-      <li class="Option"><%= link_to 'My Profile', current_user %></li>
-      <li class="Option"><%= link_to 'Home', authenticated_root_path %></li>
+      <li class="Option">
+        <%= link_to destroy_user_session_path, method: :delete do %>
+          <i class="fa fa-sign-out" aria-hidden="true"></i> <span class="nav_text">Sign out</span>
+        <% end %>
+      </li>
+      <li class="Option">
+        <%= link_to edit_user_registration_path do %>
+          <i class="fa fa-cog" aria-hidden="true"></i> <span class="nav_text">Settings</span>
+        <% end %>
+      </li>
+      <% if current_user.requested_friends.any? %>
+        <li class="news">
+          <%= link_to users_path(friends: current_user.id) do %>
+              <i class="fa fa-comment-o" aria-hidden="true"></i> <span class="nav_text pending"><%=current_user.requested_friends.count%></span>
+          <% end %>
+        </li>
+      <% end %>
+      <li class="Option">
+        <%= link_to current_user do %>
+            <%= image_tag current_user.avatar.url(:thumb), id: 'nav_avatar' %> <span class="nav_text">My Profile</span>
+        <% end %>
+      </li>
+      <li class="Option">
+        <%= link_to authenticated_root_path do %>
+            <i class="fa fa-home" aria-hidden="true"></i> <span class="nav_text">Home</span>
+          <% end %>
+      </li>
+      <li class="Option">
+        <%= link_to users_path do %>
+          <i class="fa fa-users" aria-hidden="true"></i> <span class="nav_text">Users</span>
+        <% end %>
+      </li>
+      <li class="Option">
+        <div class="search">
+          <%= form_tag users_path, method: 'get', id: 'search-form' do %>
+              <%= autocomplete_field_tag :search, 'Find your friends...', home_autocomplete_user_username_path,
+                'min-length' => 1, class:'search_field', onfocus: 'if($(this).val()=="Find your friends..."){$(this).val("");};',
+                 onblur: 'if($(this).val()==""){$(this).val("Find your friends...");};', 'data-noMatchesLabel' => 'no users found' %>
+          <% end %>
+          <script type="text/javascript" charset="utf-8">
+            $('#search').bind('railsAutocomplete.select', function(event, data){
+              $('#search-form').submit();
+              window.location.href = '/users/' + data.item.id;
+            });
+          </script>
+        </div>
+      </li>
     <% else %>
       <li class="Option"><%= link_to 'Sign in', new_user_session_path %></li>
       <li class="Option"><%= link_to 'Sign up', new_user_registration_path %></li>

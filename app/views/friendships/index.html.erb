@@ -1,0 +1,16 @@
+<div>
+  <% @friendships.each do |f| %>
+    <% if f.status == 'pending' %>
+      PENDING: User: <%= f.user.username %> | Friend: <%= f.friend.username %>
+    <% elsif f.status == 'accepted' %>
+      ACCEPTED: User: <%= f.user.username %> | Friend: <%= f.friend.username %>
+    <% elsif f.status == 'requested' %>
+      REQUESTED: User: <%= f.user.username %> | Friend: <%= f.friend.username %>
+    <% end %>
+    <br>
+  <% end %>
+  ***** <Br>
+  <% current_user.friends.each do |friend| %>
+    Friend: <%= friend.username %> <%= link_to 'Delete friend', user_friendship_path(current_user, current_user.get_friendship(friend)), method: :delete %>
+  <% end %>
+</div>

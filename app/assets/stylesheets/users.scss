@@ -4,3 +4,48 @@
 #avatar_preview {
   width: 250px;
 }
+.users_index {
+  width: 35%;
+  margin: 0 auto;
+  padding: 1px 10px;
+  background: white;
+  word-wrap: break-word; //force looooooong words fit in boxes;
+  display: block;
+  -webkit-box-shadow: 0px 0px 2px 1px rgba(191,191,191,1);
+  -moz-box-shadow: 0px 0px 2px 1px rgba(191,191,191,1);
+  box-shadow: 0px 0px 2px 0.5px rgba(191,191,191,1);
+  margin-top: 60px;
+  ul.users {
+    list-style: none;
+    padding-left: 0;
+    li {
+      padding: 10px 0;
+      a {
+        text-decoration: none;
+        color: #499DE8;
+        img {
+          vertical-align: middle;
+        }
+        .username {
+          margin-left: 5px;
+        }
+      }
+      .friends_links {
+        float: right;
+        a {
+          float: right;
+          display: block;
+          padding: 5px 5px;
+          text-decoration: none;
+          background: #499DE8;
+          color: white;
+          margin: 0 0 0 5px;
+          border-radius: 5px;
+          &:hover {
+            background: darken(#499DE8, 15%);
+          }
+        }
+      }
+    }
+  }
+}

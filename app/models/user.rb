@@ -2,6 +2,21 @@ class User < ActiveRecord::Base
   has_many :posts
   has_many :comments
   has_many :likes
+  scope :username_like, -> (name) { where("username ilike ?", name)}
+  has_many :friendships
+  has_many :accepted_friendships, -> { where(status: Friendship.statuses[:accepted]) }, class_name: 'Friendship'
+  has_many :requested_friendships, -> { where(status: Friendship.statuses[:requested]) }, class_name: 'Friendship'
+  has_many :pending_friendships, -> { where(status: Friendship.statuses[:pending]) }, class_name: 'Friendship'
+
+  #accetped friends
+  has_many :friends, through: :accepted_friendships, after_remove: :remove_complement_friendship
+
+  #users that requested friendship with user
+  has_many :requested_friends, through: :requested_friendships, source: :friend
+
+  #users that user requested friendship with
+  has_many :pending_friends, through: :pending_friendships, source: :friend
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -26,6 +41,36 @@ class User < ActiveRecord::Base
   # Returns true when the user likes post.
   def likes?(likeable)
     Like.find_by(likeable: likeable, user: self, like: true)
+  end
+
+  def get_friendship(user)
+    Friendship.find_by(user_id: self, friend_id: user)
+  end
+
+  def is_friends_with?(user)
+    Friendship.exists?(user_id: self, friend_id: user, status: Friendship.statuses[:accepted])
+  end
+
+  def request_pending?(user)
+    Friendship.exists?(user_id: self, friend_id: user, status: Friendship.statuses[:requested])
+  end
+
+  def requested_friendship?(user)
+    Friendship.exists?(user_id: self, friend_id: user, status: Friendship.statuses[:pending])
+  end
+
+  def unaccepted_friends
+    requested_friends + pending_friends
+  end
+
+  private
+
+  def create_complement_friendship(friend)
+    self.friends << friend unless friend.friends.include?(self)
+  end
+
+  def remove_complement_friendship(friend)
+    friend.friends.delete(self)
   end
 
 end

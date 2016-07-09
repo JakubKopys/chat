@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :posts do
-      resources :comments, :only => [:show, :create, :delete, :destroy, :edit, :update, :new] do
+      resources :comments, :only => [:show, :create, :destroy, :edit, :update, :new] do
         member do
           post 'like'
         end
@@ -13,12 +13,14 @@ Rails.application.routes.draw do
         post 'like'
       end
     end
+    resources :friendships, only: [:index, :destroy, :update, :create]
   end
 
   devise_scope :user do
     authenticated :user do
       #root 'users#index', as: :authenticated_root
       root 'home#index', as: :authenticated_root
+      get 'home/autocomplete_user_username'
     end
 
     unauthenticated do

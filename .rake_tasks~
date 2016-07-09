@@ -39,6 +39,7 @@ spec
 spec:controllers
 spec:helpers
 spec:models
+spec:statsetup
 stats
 test
 test:all

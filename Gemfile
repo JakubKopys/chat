@@ -22,8 +22,9 @@ gem 'thin'
 gem 'font-awesome-rails', '~> 4.6', '>= 4.6.3.0'
 gem 'remotipart', '~> 1.2', '>= 1.2.1'
 gem 'ancestry', '~> 2.1'
+gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 gem 'will_paginate', '~> 3.1'
-
+gem 'rails-jquery-autocomplete'
 
 group :development, :test do
   gem 'byebug',      '3.4.0'

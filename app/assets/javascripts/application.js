@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/autocomplete
+//= require autocomplete-rails
 //= require jquery.remotipart
 //= require private_pub
 //= require turbolinks
@@ -72,7 +74,11 @@ function ready() {
         });
         return $(window).scroll();
     }
+    $('input').click(function()
+    {
+        $(this).attr('placeholder','');
 
+    });
 }
 
 

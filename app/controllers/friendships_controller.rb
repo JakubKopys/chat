@@ -6,11 +6,18 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    friend = User.find(params[:user_id])
+    @friend = User.find(params[:user_id])
+    @user = current_user
 
-    Friendship.request(current_user, friend)
+    Friendship.request(@user, @friend)
 
-    redirect_to user_friendships_path(user_id: current_user.id)
+    respond_to do |format|
+      format.html {
+        flash[:notice] = 'Friend request sent.'
+        redirect_to authenticated_root_path
+      }
+      format.js
+    end
   end
 
   def update
@@ -19,7 +26,13 @@ class FriendshipsController < ApplicationController
 
     Friendship.accept(@user, @friend)
 
-    redirect_to user_friendships_path(user_id: current_user.id)
+   respond_to do |format|
+     format.html {
+       flash[:notice] = 'Friend request accepted.'
+       redirect_to authenticated_root_path
+     }
+     format.js
+   end
   end
 
   def destroy

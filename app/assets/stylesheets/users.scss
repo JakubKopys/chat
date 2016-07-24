@@ -49,3 +49,25 @@
     }
   }
 }
+
+.user {
+  margin-top: 40px;
+  .core {
+    text-align: center;
+  }
+  .friends_links {
+    text-align: center;
+    margin: 10px 0;
+    a {
+      padding: 5px 5px;
+      text-decoration: none;
+      background: #499DE8;
+      color: white;
+      margin: 0 0 0 5px;
+      border-radius: 5px;
+      &:hover {
+        background: darken(#499DE8, 15%);
+      }
+    }
+  }
+}

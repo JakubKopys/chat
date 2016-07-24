@@ -63,6 +63,10 @@ class User < ActiveRecord::Base
     requested_friends + pending_friends
   end
 
+  def feed
+    friends_ids = friends.ids
+    Post.where("user_id IN (:friends_ids) OR user_id = :user_id", friends_ids: friends_ids, user_id: id)
+  end
   private
 
   def create_complement_friendship(friend)

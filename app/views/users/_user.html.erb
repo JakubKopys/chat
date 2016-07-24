@@ -2,22 +2,5 @@
   <%= link_to user do %>
       <%= image_tag user.avatar.url(:medium), class: 'small_avatar' %><span class='username'><%= user.username %></span>
   <% end %>
-  <div class="friends_links">
-    <% if current_user.requested_friendship?(user) %>
-        Friendship request sent.
-    <% elsif current_user.request_pending?(user) %>
-        <%= link_to user_friendship_path(user.id, current_user.get_friendship(user)), method: :put, class:"accept"  do %>
-          Accept request <i class="fa fa-user-plus" aria-hidden="true"></i>
-        <% end %>
-        <%= link_to user_friendship_path(current_user, current_user.get_friendship(user)), method: :delete, class:"refuse" do %>
-          Refuse request <i class="fa fa-user-times" aria-hidden="true"></i>
-        <% end %>
-    <% elsif !current_user.is_friends_with?(user) && current_user != user%>
-        <%= link_to user_friendships_path(user.id), method: :post, class:"send" do %>
-          Send request <i class="fa fa-plus" aria-hidden="true"></i>
-        <% end %>
-    <% elsif current_user.is_friends_with?(user) %>
-        Friend
-    <% end %>
-  </div>
+  <span class="friendship_links friend_<%=user.id%>"><%= render 'users/friends_links', user: user %></span>
 </div>

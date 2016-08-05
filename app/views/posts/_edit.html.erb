@@ -1,0 +1,27 @@
+<div class="edit_partial clearfix">
+  <%= form_for [@user, @post], html: { multipart: true }, remote: true do |f| %>
+
+      <div class="field">
+        <%= f.text_area :content, class: 'content_area' %>
+      </div>
+
+      <div>
+        <% if @post.image.file? %>
+            <%= link_to @post.image.url(:lightbox), class: 'post_thumb' do %>
+                <%= image_tag @post.image.url(:medium), class: "edit_post_prev post_image_#{@post.id}" %>
+            <% end %>
+        <% else %>
+          <div class="post_img_preview"><img class="edit_post_prev edit_<%=post.id%>"/></div>
+        <% end %>
+      </div>
+
+      <div class="field avatar_button">
+        <%= f.label :image, class: 'fileContainer' do %>
+            <span class="tooltip">Change Image</span>
+            <%= f.file_field :image, class: 'edit_post_image' %>
+        <% end %>
+      </div>
+
+      <%= f.submit 'Edit', id: 'edit_post' %>
+  <% end %>
+</div>

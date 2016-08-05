@@ -13,6 +13,8 @@
           Send request <i class="fa fa-plus" aria-hidden="true"></i>
       <% end %>
   <% elsif current_user.is_friends_with?(user) %>
-      Friend
+      <%= link_to user_friendship_path(current_user, current_user.get_friendship(user)), method: :delete, class: "delete", remote: true do %>
+          Delete friend <i class="fa fa-minus" aria-hidden="true"></i>
+      <% end %>
   <% end %>
 </div>

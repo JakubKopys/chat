@@ -17,7 +17,7 @@
  */
 @import "font-awesome";
 
-$my-blue: #499DE8;
+$my-blue: #499de8;
 .clearfix::before, .clearfix::after {
   content:"";
   display:table;
@@ -322,6 +322,10 @@ img.edit_img_preview {
     width: 200px;
     margin-top: 10px;
     padding-left: 20px;
+}
+
+img.edit_post_prev {
+  max-width: 450px;
 }
 //---------------------------------------AUTHORIZED-LINKS-------------------------------------
 .authorized_links {

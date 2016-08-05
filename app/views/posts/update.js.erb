@@ -1,0 +1,12 @@
+<% if @post.errors.empty? %>
+  $("ul#comment_error").html('');
+  $('.post_<%=@post.id%>').replaceWith('<%= escape_javascript(render 'posts/post', post: @post) %>');
+  $('.replies').hide();
+<% else %>
+  $("ul#comment_error").html(''); // clear earlier flash messages if any.
+  <% @post.errors.full_messages.each do |msg|  %>
+    $("ul#comment_error").append($("<li />").html("<%= msg.html_safe %>"));
+  <% end %>
+$("ul#comment_error").css('opacity', '1');
+  $("#comment_error").delay(3200).animate({'opacity': '0'}, 400);
+<% end %>

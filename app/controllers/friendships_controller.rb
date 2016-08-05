@@ -41,6 +41,11 @@ class FriendshipsController < ApplicationController
     @friend = (@user != @friendship.user) ? @friendship.user : @friendship.friend
     Friendship.remove(@user, @friend)
 
-    redirect_to user_friendships_path(user_id: current_user.id)
+    respond_to do |format|
+      format.html {
+        redirect_to user_friendships_path(user_id: current_user.id)
+      }
+      format.js
+    end
   end
 end

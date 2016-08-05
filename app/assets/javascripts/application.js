@@ -87,7 +87,7 @@ function readURL(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('.image_upload_preview, #avatar_preview').attr('src', e.target.result);
+            $('.image_upload_preview, #avatar_preview, .edit_post_prev').attr('src', e.target.result);
         };
 
         reader.readAsDataURL(input.files[0]);
@@ -133,6 +133,12 @@ $(document).delegate('.img_com_upl, .comment_image', 'change', function() {
     var className = $(this).attr('class').substr(12);
     readURL_comment(this, className);
 });
+
+$(document).delegate('.edit_post_image', 'change', function() {
+    readURL(this);
+});
+
+
 
 
 // delegate so it works after post form change afterr invalid submission.

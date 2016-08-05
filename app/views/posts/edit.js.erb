@@ -1,0 +1,8 @@
+$('.post_con_<%= @post.id %>').html("<%= escape_javascript(render partial: 'posts/edit', user: @user, post: @post) %>");
+
+/*$(document).delegate('.edit_link', 'click', function (e) {
+ e.preventDefault();
+ var post_id = $(this).data("post");
+ $(this).html(post_id);
+ $('post_con_'+post_id).html()
+ });*/

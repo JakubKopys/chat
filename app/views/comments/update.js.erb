@@ -1,4 +1,4 @@
 $('.comment_<%=@comment.id%>').replaceWith('<%= escape_javascript(render 'comments/comment', comment: @comment) %>');
 <% if @comment.root? %>
-   $('.replies_<%=@comment.id%>').hide();
+ $('.replies_<%=@comment.id%>').hide();
 <% end %>

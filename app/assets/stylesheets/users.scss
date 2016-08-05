@@ -45,6 +45,12 @@
             background: darken(#499DE8, 15%);
           }
         }
+        a.delete {
+          background: #FF4136;
+          &:hover {
+            background: darken(#FF4136, 10%);
+          }
+        }
       }
     }
   }
@@ -67,6 +73,12 @@
       border-radius: 5px;
       &:hover {
         background: darken(#499DE8, 15%);
+      }
+    }
+    a.delete {
+      background: #FF4136;
+      &:hover {
+        background: darken(#FF4136, 10%);
       }
     }
   }

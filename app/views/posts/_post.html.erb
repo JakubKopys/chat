@@ -6,19 +6,21 @@
     <br><small><%= link_to post.created_at.strftime('%d %b %Y %H:%M'), user_post_path(post.user, post), class: 'timestamp' %></small>
     </div>
   </div>
-  <div class="post_content"><%= post.content %></div>
-  <div>
-    <% if post.image.file? %>
-      <%= link_to post.image.url(:lightbox), class: 'post_thumb' do %>
-        <%= image_tag post.image.url(:medium), id: "image_#{post.id}" %>
+  <div class="post_con_<%=post.id%>">
+    <div class="post_content"><%= post.content %></div>
+    <div>
+      <% if post.image.file? %>
+        <%= link_to post.image.url(:lightbox), class: 'post_thumb' do %>
+          <%= image_tag post.image.url(:medium), id: "image_#{post.id}" %>
+        <% end %>
+        <div class='box'></div>
       <% end %>
-      <div class='box'></div>
-    <% end %>
+    </div>
   </div>
   <div class="links">
     <% if current_user == post.user %>
       <small><%= link_to 'Delete', user_post_path(post.user, post), method: :delete %></small>
-      <small><%= link_to 'Edit', edit_user_post_path(post.user, post) %></small>
+      <small><%= link_to 'Edit', edit_user_post_path(post.user, post), class: "edit_link", data: {post: post.id}, remote: true %></small>
     <% end %>
     <% if post.comments.count > 3 %>
       <small><%= link_to "More comments(#{post.comments.count})", show_comments_user_post_path(post.user, post), class: "more_comments more_#{post.id}", remote: true %></small>

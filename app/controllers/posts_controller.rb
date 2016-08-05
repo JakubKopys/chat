@@ -23,17 +23,23 @@ before_action :find_user_and_post, only: [:show, :edit, :destroy, :update]
   end
 
   def edit
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
-    if @post.update post_params
-      redirect_to authenticated_root_path
-      flash[:success] = 'Post updated.'
-    else
-      render 'edit'
-      flash[:success] = 'Invalid edit.'
+    #if @post.update post_params
+    #  redirect_to authenticated_root_path
+    #  flash[:success] = 'Post updated.'
+    #else
+    #  render 'edit'
+    #  flash[:success] = 'Invalid edit.'
+    #end
+    @post.update post_params
+    respond_to do |f|
+      f.js
     end
-
   end
 
   def destroy

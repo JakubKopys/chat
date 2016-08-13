@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  get 'get_user' => 'users#get_user'
 
   resources :users do
     resources :posts do
@@ -14,6 +15,10 @@ Rails.application.routes.draw do
       end
     end
     resources :friendships, only: [:index, :destroy, :update, :create]
+  end
+
+  resources :chatrooms do
+    resources :messages
   end
 
   devise_scope :user do

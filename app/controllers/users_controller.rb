@@ -16,4 +16,8 @@ class UsersController < ApplicationController
     @posts = @user.posts
   end
 
+  def get_user
+    render json: {name: current_user.username}
+  end
+
 end

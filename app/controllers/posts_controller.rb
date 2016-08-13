@@ -3,7 +3,7 @@ before_action :find_user, only: [:create, :index]
 before_action :find_user_and_post, only: [:show, :edit, :destroy, :update]
 
   def index
-    @posts = @user.posts.order('created_at DESC')
+    @posts = @user.posts.includes(:comments).order('created_at DESC')
   end
 
   def create
@@ -29,13 +29,6 @@ before_action :find_user_and_post, only: [:show, :edit, :destroy, :update]
   end
 
   def update
-    #if @post.update post_params
-    #  redirect_to authenticated_root_path
-    #  flash[:success] = 'Post updated.'
-    #else
-    #  render 'edit'
-    #  flash[:success] = 'Invalid edit.'
-    #end
     @post.update post_params
     respond_to do |f|
       f.js

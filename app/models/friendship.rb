@@ -1,4 +1,4 @@
-class Friendship < ActiveRecord::Base
+class Friendship < ApplicationRecord
   enum status: [:pending, :requested, :accepted]
   belongs_to :user
   belongs_to :friend, class_name: 'User'
@@ -32,8 +32,8 @@ class Friendship < ActiveRecord::Base
   end
 
   def self.remove(user, friend)
-    friendship1 = find_by(user_id: user, friend_id: friend)
-    friendship2 = find_by(user_id: friend, friend_id: user)
+    friendship1 = where(user_id: user, friend_id: friend).first
+    friendship2 = where(user_id: friend, friend_id: user).first
     friendship1.delete
     friendship2.delete
   end

@@ -3,11 +3,20 @@
   <div class="friend_list">
       <ul>
         <% @users.each do |user| %>
-          <%= link_to '#', class: 'start-conversation', 'data-sid' => current_user.id, 'data-rip' => user.id do %>
-            <li>
-              <%= image_tag user.avatar.url(:thumb) %>
-              <span><%= user.username %></span>
-            </li>
+          <% unless Chatroom.exist?(current_user, user) %>
+            <%= link_to chatrooms_path(friend: user.username), method: :post, class: 'start-conversation', 'data-sid' => current_user.id, 'data-rip' => user.id do %>
+              <li>
+                <%= image_tag user.avatar.url(:thumb) %>
+                <span><%= user.username %></span>
+              </li>
+            <% end %>
+          <% else %>
+            <%= link_to chatroom_path current_user.get_chatroom_with(user) , class: 'start-conversation', 'data-sid' => current_user.id, 'data-rip' => user.id do %>
+                <li>
+                  <%= image_tag user.avatar.url(:thumb) %>
+                  <span><%= user.username %></span>
+                </li>
+            <% end %>
           <% end %>
         <% end %>
       </ul>

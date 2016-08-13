@@ -37,7 +37,7 @@ class FriendshipsController < ApplicationController
 
   def destroy
     @user = current_user
-    @friendship = Friendship.find(params[:id])
+    @friendship = Friendship.find_by(id: params[:id])
     @friend = (@user != @friendship.user) ? @friendship.user : @friendship.friend
     Friendship.remove(@user, @friend)
 

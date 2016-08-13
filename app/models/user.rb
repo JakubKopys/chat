@@ -1,8 +1,12 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   has_many :posts
   has_many :comments
   has_many :likes
   scope :username_like, -> (name) { where("username ilike ?", name)}
+  has_many :messages
+  has_many :chatrooms, through: :chatroom_users
+  has_many :chatroom_users, :dependent => :destroy
+
   has_many :friendships
   has_many :accepted_friendships, -> { where(status: Friendship.statuses[:accepted]) }, class_name: 'Friendship'
   has_many :requested_friendships, -> { where(status: Friendship.statuses[:requested]) }, class_name: 'Friendship'
@@ -17,11 +21,9 @@ class User < ActiveRecord::Base
   #users that user requested friendship with
   has_many :pending_friends, through: :pending_friendships, source: :friend
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
-  has_many :conversations, :foreign_key => :sender_id
+
   # Virtual attribute for authenticating by either username or email
   # This is in addition to a real persisted field like 'username'
   attr_accessor :login
@@ -44,7 +46,7 @@ class User < ActiveRecord::Base
   end
 
   def get_friendship(user)
-    Friendship.find_by(user_id: self, friend_id: user)
+    Friendship.where(user_id: self, friend_id: user).first
   end
 
   def is_friends_with?(user)
@@ -67,6 +69,16 @@ class User < ActiveRecord::Base
     friends_ids = friends.ids
     Post.where("user_id IN (:friends_ids) OR user_id = :user_id", friends_ids: friends_ids, user_id: id)
   end
+
+  def get_chatroom_with(friend)
+    Chatroom.joins(:users).where("users.id" => [self.id, friend.id]).where("users.id" => [friend.id]).last
+    #self.chatrooms.each do |chatroom|
+    #  if chatroom.users.first == friend || chatroom.users.second == friend
+    #    return chatroom
+    #  end
+    #end
+  end
+
   private
 
   def create_complement_friendship(friend)

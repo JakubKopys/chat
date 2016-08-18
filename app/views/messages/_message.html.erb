@@ -1,0 +1,10 @@
+<div class="message clearfix">
+  <%= image_tag message.user.avatar.url(:thumb) %>
+  <span class="msg_body">
+    <strong><%= message.user.username %>: </strong>
+    <%= message.body %>
+  </span>
+  <small class="timestamp">
+    <%= time_ago_in_words(message.created_at) %> ago.
+  </small>
+</div>

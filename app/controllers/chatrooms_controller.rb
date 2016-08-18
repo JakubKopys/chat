@@ -20,7 +20,7 @@ class ChatroomsController < ApplicationController
     @chatroom = Chatroom.find(params[:id])
 
     @chatroom_users = @chatroom.chatroom_users.includes(:user)
-    @messages = @chatroom.messages.order(created_at: :desc)
+    @messages = @chatroom.messages.order(created_at: :asc)
   end
 
   private

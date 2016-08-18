@@ -11,15 +11,18 @@
 <body>
 <div class="backdrop"></div>
 <%= render 'layouts/nav' %>
-<div class="container">
+  <div class="container">
 
-  <!--<div class="flashes">
+  <div class="flashes">
     <% flash.each do |key, value| %>
         <%= content_tag :div, value, class: "flash #{key}" %>
-    <% end %>-->
+    <% end %>
     <ul id="notice"></ul>
     <ul id="comment_error"></ul>
   </div>
+  <% if current_user %>
+    <%= render 'layouts/friend_list', users: (User.all - [current_user]) %>
+  <% end %>
   <%= yield %>
 </div>
 <div class="footer"></div>

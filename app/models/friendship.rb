@@ -26,7 +26,7 @@ class Friendship < ApplicationRecord
   end
 
   def self.accept_one_side(user, friend)
-    request = find_by(user_id: user, friend_id: friend)
+    request = where(user_id: user, friend_id: friend).last
     request.status = :accepted
     request.save!
   end

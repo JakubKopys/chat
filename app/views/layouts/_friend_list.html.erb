@@ -1,0 +1,21 @@
+<div class="friend_list">
+  <ul>
+    <% users.each do |user| %>
+        <% unless Chatroom.exist?(current_user, user) %>
+            <%= link_to chatrooms_path(friend: user.username), method: :post, data: {behavior: 'chatroom-link'} do %>
+                <li>
+                  <%= image_tag user.avatar.url(:thumb) %>
+                  <span><%= user.username %></span>
+                </li>
+            <% end %>
+        <% else %>
+            <%= link_to current_user.get_chatroom_with(user), data: {behavior: 'chatroom-link', chatroom_id: current_user.get_chatroom_with(user).id} do %>
+                <li>
+                  <%= image_tag user.avatar.url(:thumb) %>
+                  <span><%= user.username %></span>
+                </li>
+            <% end %>
+        <% end %>
+    <% end %>
+  </ul>
+</div>

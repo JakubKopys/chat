@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   get 'get_user' => 'users#get_user'
-
+  get 'render_post' => 'posts#render_post'
   resources :users do
     resources :posts do
       resources :comments, :only => [:show, :create, :destroy, :edit, :update, :new] do

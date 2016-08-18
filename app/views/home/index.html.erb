@@ -1,29 +1,7 @@
 <div class="home">
 
-  <div class="friend_list">
-      <ul>
-        <% @users.each do |user| %>
-          <% unless Chatroom.exist?(current_user, user) %>
-            <%= link_to chatrooms_path(friend: user.username), method: :post, class: 'start-conversation', 'data-sid' => current_user.id, 'data-rip' => user.id do %>
-              <li>
-                <%= image_tag user.avatar.url(:thumb) %>
-                <span><%= user.username %></span>
-              </li>
-            <% end %>
-          <% else %>
-            <%= link_to chatroom_path current_user.get_chatroom_with(user) , class: 'start-conversation', 'data-sid' => current_user.id, 'data-rip' => user.id do %>
-                <li>
-                  <%= image_tag user.avatar.url(:thumb) %>
-                  <span><%= user.username %></span>
-                </li>
-            <% end %>
-          <% end %>
-        <% end %>
-      </ul>
-  </div>
-
-  <div class="add clearfix">
-    <%= form_for [current_user, Post.new], html: { multipart: true }, remote: true do |f| %>
+  <div class="add clearfix" id="new_post">
+    <%= form_for [current_user, Post.new], html: { multipart: true }, remote: true, :authenticity_token => true do |f| %>
 
         <div class="field">
           <%= f.text_area :content, class: 'content_area' %>
@@ -38,7 +16,7 @@
 
         </div>
 
-        <%= f.submit 'Add Post', id: 'add_post' %>
+        <%= f.submit 'Add Post', id: 'add_post', data: { current_user_id: current_user.id } %>
     <% end %>
   </div>
 

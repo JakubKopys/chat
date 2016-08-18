@@ -20,7 +20,6 @@ gem 'devise'
 gem 'private_pub'
 gem 'thin'
 gem 'font-awesome-rails', '~> 4.6', '>= 4.6.3.0'
-#gem 'remotipart'
 gem 'ancestry', '~> 2.1'
 gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 gem 'will_paginate', '~> 3.1'
@@ -29,6 +28,7 @@ gem 'redis', '~> 3.2'
 gem 'puma', '~> 3.0'
 gem 'record_tag_helper'
 gem 'rack-mini-profiler', '~> 0.10.1'
+gem 'jquery-fileupload-rails', '~> 0.4.7'
 
 
 group :development, :test do

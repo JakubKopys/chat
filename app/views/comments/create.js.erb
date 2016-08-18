@@ -2,6 +2,7 @@
     $("ul#comment_error").html('');
     <% if @comment.root? %>
       $('.comments_<%= @comment.post.id %>').append("<%= escape_javascript(render @comment) %>");
+      $('.replies_<%=@comment.id%>').hide();
     <% else %>
       $('.com_content_<%=@comment.parent.id %> .replies').prepend("<%= escape_javascript(render @comment) %>");
     <% end %>

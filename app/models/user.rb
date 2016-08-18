@@ -71,12 +71,12 @@ class User < ApplicationRecord
   end
 
   def get_chatroom_with(friend)
-    Chatroom.joins(:users).where("users.id" => [self.id, friend.id]).where("users.id" => [friend.id]).last
-    #self.chatrooms.each do |chatroom|
-    #  if chatroom.users.first == friend || chatroom.users.second == friend
-    #    return chatroom
-    #  end
-    #end
+    #Chatroom.joins(:users).where("users.id" => [self.id, friend.id]).where("users.id" => [friend.id]).last
+    self.chatrooms.includes(:users).each do |chatroom|
+      if chatroom.users.first == friend || chatroom.users.second == friend
+        return chatroom
+      end
+    end
   end
 
   private

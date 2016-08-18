@@ -1,13 +1,17 @@
 class MessagesController < ApplicationController
+  before_action :set_chatroom
+
   def create
-    @chatroom = Chatroom.find(params[:chatroom_id])
     @message = @chatroom.messages.build message_params
     @message.user = current_user
     @message.save
-    head :ok
   end
 
   private
+
+  def set_chatroom
+    @chatroom = Chatroom.find(params[:chatroom_id])
+  end
 
   def message_params
     params.require(:message).permit(:body)

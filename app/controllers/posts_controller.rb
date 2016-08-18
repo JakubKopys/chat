@@ -8,15 +8,14 @@ before_action :find_user_and_post, only: [:show, :edit, :destroy, :update]
 
   def create
     @post = @user.posts.build(post_params)
-    @post.save
-    respond_to do |format|
-      format.html {
-        flash[:notice] = 'Post added.'
-        redirect_to :back
-      }
-      format.js
-    end
 
+    respond_to do |format|
+      if @post.save
+        format.json { render json: @post }
+      else
+        format.json { render json: { error: @post.errors.full_messages }, status: 422 }
+      end
+    end
   end
 
   def show
@@ -78,6 +77,11 @@ before_action :find_user_and_post, only: [:show, :edit, :destroy, :update]
         format.js
       end
     end
+  end
+
+  def render_post
+    @post = Post.find(params[:id])
+    render json: {view: render_to_string(partial: '/posts/post', :locals => {:post => @post })}
   end
 
 

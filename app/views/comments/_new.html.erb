@@ -1,5 +1,5 @@
 <div class="add_comment clearfix">
-  <%= form_for [current_user, post, Comment.new], html: { multipart: true }, remote: true do |f| %>
+  <%= form_for [current_user, post, Comment.new], html: { multipart: true } do |f| %>
       <%= f.hidden_field :parent_id %>
       <%= link_to image_tag(current_user.avatar(:thumb)), current_user, class: 'comment_avatar' %>
       <div class="field">

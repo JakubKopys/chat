@@ -34,6 +34,7 @@ $(document).on('turbolinks:load', function() {
         $(this).attr('placeholder','');
 
     });
+
 });
 
 
@@ -48,6 +49,7 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
 function readURL_comment(input, className) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

@@ -1,20 +1,31 @@
 <div class="chatroom">
-  <div class="chatroom_users">
-    <h3>Chatroom users:</h3>
-    <% @chatroom_users.each do |chatroom_user| %>
-      <%= chatroom_user.user.username %>
-    <% end %>
-  </div>
 
-  <div class="messages" data-chatroom-id="<%= @chatroom.id %>" data-behavior="messages">
-    <% @messages.includes(:user).limit(100).each do |message| %>
-        <%= render 'messages/message', message: message %>
-    <% end %>
-  </div>
+    <section class="module">
+      <header class="top-bar">
 
-  <div class="message_form">
-    <%= form_for [@chatroom, Message.new], :remote => true, data: {behavior: 'send-message', chatroomid: @chatroom.id, userid: current_user.id} do |f| %>
-        <%= f.text_area :body, rows: 1, autofocus: true %>
-    <% end %>
-  </div>
+        <div class="left">
+          <i class="fa fa-comment" aria-hidden="true"></i>
+          <h1><%= @friend.user.username %></h1>
+        </div>
+
+        <div class="right">
+          <i class="fa fa-minus" aria-hidden="true"></i>
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+
+      </header>
+
+      <ol class="discussion" data-chatroom-id="<%= @chatroom.id %>" data-behavior="messages">
+        <% @messages.includes(:user).limit(100).each do |message| %>
+            <%= render message %>
+        <% end %>
+      </ol>
+
+      <div class="message_form">
+        <%= form_for [@chatroom, Message.new], data: {behavior: 'send-message', chatroomid: @chatroom.id, userid: current_user.id} do |f| %>
+            <%= f.text_area :body, rows: 1, autofocus: true %>
+        <% end %>
+      </div>
+    </section>
+
 </div>

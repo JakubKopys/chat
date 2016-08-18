@@ -89,8 +89,8 @@ clear_post_form = () ->
   $('.content_area').val('');
 
 scroll_messages_to_bottom = () ->
-  $messages = $('.messages')
-  if $('.messages').length > 0
+  $messages = $('.discussion')
+  if $('.discussion').length > 0
     height = $messages[0].scrollHeight
     $messages.scrollTop(height)
 

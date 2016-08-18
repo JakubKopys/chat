@@ -29,6 +29,7 @@ gem 'puma', '~> 3.0'
 gem 'record_tag_helper'
 gem 'rack-mini-profiler', '~> 0.10.1'
 gem 'jquery-fileupload-rails', '~> 0.4.7'
+gem 'pry'
 
 
 group :development, :test do

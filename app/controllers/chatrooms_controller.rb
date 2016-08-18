@@ -18,14 +18,15 @@ class ChatroomsController < ApplicationController
 
   def show
     @chatroom = Chatroom.find(params[:id])
-
-    @chatroom_users = @chatroom.chatroom_users.includes(:user)
-    @messages = @chatroom.messages.order(created_at: :asc)
+    @friend = (@chatroom.chatroom_users - [ChatroomUser.where(user: current_user, chatroom: @chatroom).first])[0]
+    @messages = @chatroom.messages.order(created_at: :asc).limit(100)
   end
 
-  private
-
-  def chatroom_exists?
-
+  def open_chat
+    @chatroom = Chatroom.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
   end
+
 end

@@ -4,10 +4,13 @@ class MessageRelayJob < ApplicationJob
   def perform(data)
     id = data['chatroom_id']
     chatroom = Chatroom.find(id)
-    message = chatroom.messages.create! body: data['message'], user: User.find(data['user_id'])
+    user = User.find(data['user_id'])
+    message = chatroom.messages.create! body: data['message'], user: user
     ActionCable.server.broadcast "chatrooms:#{id}", {
-        message: MessagesController.render(message),
-        chatroom_id: id
+        message: ApplicationController.render_with_signed_in_user(user, message),
+        chatroom_id: id,
+        message_id: message.id,
+        sender_id: user.id
     }
   end
 end

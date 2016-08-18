@@ -1,10 +1,21 @@
-<div class="message clearfix">
-  <%= image_tag message.user.avatar.url(:thumb) %>
-  <span class="msg_body">
-    <strong><%= message.user.username %>: </strong>
-    <%= message.body %>
-  </span>
-  <small class="timestamp">
-    <%= time_ago_in_words(message.created_at) %> ago.
-  </small>
-</div>
+<% if current_user == message.user %>
+  <li class="self" data-message-id="<%= message.id %>">
+    <div class="avatar">
+      <%= image_tag message.user.avatar.url(:thumb) %>
+    </div>
+    <div class="messages">
+      <p><%= message.body %></p>
+      <time ><%= time_ago_in_words(message.created_at) %></time>
+    </div>
+  </li>
+<% else %>
+  <li class="other">
+    <div class="avatar">
+      <%= image_tag message.user.avatar.url(:thumb) %>
+    </div>
+    <div class="messages">
+      <p><%= message.body %></p>
+      <time ><%= time_ago_in_words(message.created_at) %></time>
+    </div>
+  </li>
+<% end %>

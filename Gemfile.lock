@@ -354,6 +354,7 @@ DEPENDENCIES
   paperclip (~> 4.3, >= 4.3.6)
   pg (~> 0.18.4)
   private_pub
+  pry
   puma (~> 3.0)
   rack-mini-profiler (~> 0.10.1)
   rails (~> 5.0)

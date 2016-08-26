@@ -40,14 +40,18 @@
     }
   }
   */
-  #message_body {
-    width: 280px;
-    border-radius: 0;
-    resize: none;
-    border: 1px solid darken(#e5e5e5, 5%);
-    margin: 5px;
-    color: #535353;
-
+  .message_form {
+    border: 1px solid #ccc;
+    border-top: none;
+    #message_body {
+      z-index: 10000;
+      width: 280px;
+      border-radius: 0;
+      resize: none;
+      border: 1px solid darken(#e5e5e5, 5%);
+      margin: 5px;
+      color: #535353;
+    }
   }
 
 }
@@ -58,13 +62,14 @@
 }
 
 .module {
+  box-shadow: -2px -1px 5px 0px rgba(0,0,0,0.2);
   overflow-x: hidden;
   width: 300px;
   margin: 20px auto;
-  border: 1px solid darken(#e5e5e5, 5%);
+  background: white;
 }
 
-.top-bar {
+.top-bar {;
   background: #666;
   color: white;
   padding: 0.5rem;
@@ -82,10 +87,16 @@
     position: relative;
     bottom: 2px;
     right: 10px;
+    &:hover {
+      cursor: pointer;
+    }
   }
   i.fa-times {
     position: relative;
     bottom: 4px;
+    &:hover {
+      cursor: pointer;
+    }
   }
   .left {
     float: left;
@@ -110,19 +121,20 @@
 }
 
 .discussion {
-  max-height: 680px;
+  height: 500px;
   overflow-y: scroll;
   list-style: none;
   background: #e5e5e5;
   margin: 0;
-  padding: 0 0 0px 0; // finality
+  padding: 0;
   li {
-    padding: 0.5rem;
+    padding: 0.3rem;
     overflow: hidden;
     display: flex;
   }
   .avatar {
-    width: 40px; // stronger than %
+    width: 30px; // stronger than %
+    min-width: 30px;
     // could set height, but gonna bottom-align instead
     position: relative; // for triangle
     img {
@@ -174,15 +186,23 @@
 
 .messages {
   background: white;
-  padding: 10px;
+  padding: 8px;
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(black, 0.2);
   p {
     font-size: 0.8rem;
-    margin: 0 0 0.2rem 0;
+    margin: 0 0 0.1rem 0;
   }
   time {
     font-size: 0.7rem;
     color: #ccc;
   }
 }
+
+.chat_box {
+    z-index: 1;
+    width: 300px;
+    position: fixed;
+    bottom: -20px;
+    right: 20px;
+  }

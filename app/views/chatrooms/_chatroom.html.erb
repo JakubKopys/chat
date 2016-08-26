@@ -1,7 +1,7 @@
-<div class="chatroom" data-chatroom-id="<%=chatroom.id%>">
+<div class="chatroom chat_box" data-chatbox-id="<%=chatroom.id%>">
 
   <section class="module">
-    <header class="top-bar">
+    <header class="top-bar" data-chatbox-id="<%=chatroom.id%>">
 
       <div class="left">
         <i class="fa fa-comment" aria-hidden="true"></i>
@@ -15,17 +15,26 @@
 
     </header>
 
-    <ol class="discussion" data-chatroom-id="<%= chatroom.id %>" data-behavior="messages">
-      <% messages.includes(:user).limit(100).each do |message| %>
-          <%= render message %>
-      <% end %>
-    </ol>
+    <div class="chat_body">
+      <ol class="discussion" data-chatroom-id="<%= chatroom.id %>" data-behavior="messages">
+        <% messages.includes(:user).last(30).each do |message| %>
+            <%= render message %>
+        <% end %>
+      </ol>
 
-    <div class="message_form">
-      <%= form_for [chatroom, Message.new], data: {behavior: 'send-message', chatroomid: chatroom.id, userid: current_user.id} do |f| %>
-          <%= f.text_area :body, rows: 1, autofocus: true %>
-      <% end %>
+      <div class="message_form">
+        <%= form_for [chatroom, Message.new], data: {behavior: 'send-message', chatroomid: chatroom.id, userid: current_user.id} do |f| %>
+            <%= f.text_area :body, rows: 1, autofocus: true, data: { chatroom_id: chatroom.id}%>
+        <% end %>
+      </div>
     </div>
   </section>
 
 </div>
+
+<script>
+  $("header.top-bar[data-chatbox-id='<%=chatroom.id%>'] .fa-minus").on("click", function(e) {
+    var $elem = $(this).parentsUntil(".chat_box");
+    $elem.find('.chat_body').slideToggle(300);
+  });
+</script>

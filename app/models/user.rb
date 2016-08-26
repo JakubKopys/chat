@@ -74,6 +74,7 @@ class User < ApplicationRecord
     #Chatroom.joins(:users).where("users.id" => [self.id, friend.id]).where("users.id" => [friend.id]).last
     self.chatrooms.includes(:users).each do |chatroom|
       if chatroom.users.first == friend || chatroom.users.second == friend
+        Rails.logger.info "************************** #{chatroom.users.first.username} ****************************"
         return chatroom
       end
     end

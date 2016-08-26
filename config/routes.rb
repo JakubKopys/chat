@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   get 'get_user' => 'users#get_user'
   get 'render_post' => 'posts#render_post'
+  get 'active_chatrooms' => 'chatrooms#active_chatrooms'
   resources :users do
     resources :posts do
       resources :comments, :only => [:show, :create, :destroy, :edit, :update, :new] do
@@ -19,6 +20,10 @@ Rails.application.routes.draw do
 
   resources :chatrooms do
     resources :messages
+    member do
+      get 'del_from_sessions'
+      get 'open_chat'
+    end
   end
 
   devise_scope :user do

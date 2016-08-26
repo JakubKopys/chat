@@ -23,7 +23,7 @@
   <h2 class="toggle">Add post</h2>
 
   <div class="posts">
-    <%= render partial: 'posts/post', collection: @posts %>
+    <%= render @posts %>
   </div>
 
   <div class="pag"><%= will_paginate @posts %></div>

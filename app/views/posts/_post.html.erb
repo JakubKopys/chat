@@ -42,7 +42,7 @@
   </div>
   <div class="comments">
     <div class="comments_<%= post.id %>">
-      <%= render post.comments.roots.order(' likes_count DESC, created_at DESC').limit(3) %>
+      <%= render post.comments.roots.order(' likes_count DESC, created_at DESC').includes(:user).limit(3) %>
     </div>
     <%= render 'comments/new', post: post %>
   </div>

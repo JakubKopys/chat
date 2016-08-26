@@ -12,25 +12,33 @@ App.chatrooms = App.cable.subscriptions.create "ChatroomsChannel",
       if $('#new_message').data('userid') != data.sender_id
         $("[data-message-id='#{data.message_id}']").removeClass()
         $("[data-message-id='#{data.message_id}']").addClass("other")
-      scroll_to_bottom()
+      scroll_to_bottom(data.chatroom_id)
     else
       $("[data-behavior='chatroom-link'][data-chatroom-id='#{data.chatroom_id}']").addClass('notify');
-    # Called when there's incoming data on the websocket for this channel
 
   speak: (data) ->
     @perform 'speak', message: data['message'], chatroom_id: data['chatroom_id'], user_id: data['user_id']
 
-$(document).on "turbolinks:load", ->
-  $("#new_message").on "keypress", (e) ->
-    if e && e.keyCode == 13
-      e.preventDefault()
-      if e.target.value.trim().length > 0
-        $chatroom_id = $("[data-behavior='send-message']").data('chatroomid')
-        $user_id = $("[data-behavior='send-message']").data('userid')
-        App.chatrooms.speak message: e.target.value, chatroom_id: $chatroom_id, user_id: $user_id
-        e.target.value = ''
+  add: (data) ->
+    @perform 'add', chatroom_id: data['chatroom_id']
 
-scroll_to_bottom = () ->
-  $messages = $('.discussion')
-  height = $messages[0].scrollHeight
-  $messages.scrollTop(height+10)
+$(document).on "keypress", '#new_message', (e) ->
+  if e && e.keyCode == 13
+    e.preventDefault()
+    if e.target.value.trim().length > 0
+      $chatroom_id = e.target.getAttribute('data-chatroom-id')
+      console.log $chatroom_id
+      $user_id = $('meta[name=user-id]').attr("content")
+      console.log $user_id
+      console.log e.target.value
+      if e.target.getAttribute('data-behavior') == "created-chatroom"
+        App.chatrooms.add chatroom_id: $chatroom_id
+        e.target.removeAttribute('data-behavior')
+      App.chatrooms.speak message: e.target.value, chatroom_id: $chatroom_id, user_id: $user_id
+      e.target.value = ''
+
+scroll_to_bottom = (id) ->
+  $messages = $(".discussion[data-chatroom-id='#{id}'")
+  if $messages.length > 0
+    height = $messages[0].scrollHeight
+    $messages.scrollTop(height)

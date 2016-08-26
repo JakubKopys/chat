@@ -6,14 +6,11 @@ class ChatroomsController < ApplicationController
     @chatroom.chatroom_users.build(user: @friend, chatroom: @chatroom)
     @chatroom.chatroom_users.build(user: current_user, chatroom: @chatroom)
 
-    if @chatroom.save
-      flash[:notice] = "chatrooom created"
-      redirect_to @chatroom
-    else
-      flash[:notice] = "chatrooom not created lol"
-      redirect_to authenticated_root_path
+    @chatroom.save
+    @chat_friend = ChatroomUser.where(chatroom: @chatroom, user: @friend).last
+    respond_to do |format|
+      format.js
     end
-
   end
 
   def show
@@ -24,6 +21,22 @@ class ChatroomsController < ApplicationController
 
   def open_chat
     @chatroom = Chatroom.find(params[:id])
+    @chat_friend = @chatroom.chatroom_users.where.not(user: current_user.id).first
+    @messages = @chatroom.messages.order(created_at: :asc)
+    session[:chatrooms] ||= []
+    session[:chatrooms].push @chatroom.id
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def del_from_sessions
+    id = Chatroom.find(params[:id]).id
+    session[:chatrooms].delete(id)
+  end
+
+  def active_chatrooms
+    @chatrooms = Chatroom.where(id: session[:chatrooms])
     respond_to do |format|
       format.js
     end

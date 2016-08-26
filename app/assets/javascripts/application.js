@@ -19,7 +19,7 @@
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
-    if ($('.pagination').length) {
+    /*if ($('.pagination').length) {
         $(window).scroll(function() {
             var url = $('.pagination .next_page').attr('href');
             if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {
@@ -29,12 +29,21 @@ $(document).on('turbolinks:load', function() {
         });
         return $(window).scroll();
     }
+    if ($('.pagination').length) {
+        $(window).scroll(function() {
+            var url = $('.pagination a.next_page').attr('href');
+            if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 60) {
+                return $.getScript(url);
+            }
+        });
+        return;
+    }*/
+    $.ajax('/active_chatrooms');
     $('input').click(function()
     {
         $(this).attr('placeholder','');
 
     });
-
 });
 
 

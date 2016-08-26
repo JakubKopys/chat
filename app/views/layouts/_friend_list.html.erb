@@ -2,14 +2,14 @@
   <ul>
     <% users.each do |user| %>
         <% unless Chatroom.exist?(current_user, user) %>
-            <%= link_to chatrooms_path(friend: user.username), method: :post, data: {behavior: 'chatroom-link'} do %>
+            <%= link_to chatrooms_path(friend: user.username), method: :post, remote: true, data: {behavior: 'chatroom-link', user: user.id} do %>
                 <li>
                   <%= image_tag user.avatar.url(:thumb) %>
                   <span><%= user.username %></span>
                 </li>
             <% end %>
         <% else %>
-            <%= link_to current_user.get_chatroom_with(user), data: {behavior: 'chatroom-link', chatroom_id: current_user.get_chatroom_with(user).id} do %>
+            <%= link_to open_chat_chatroom_path(current_user.get_chatroom_with(user)), remote: true, data: {behavior: 'chatroom-link', chatroom_id: current_user.get_chatroom_with(user).id} do %>
                 <li>
                   <%= image_tag user.avatar.url(:thumb) %>
                   <span><%= user.username %></span>

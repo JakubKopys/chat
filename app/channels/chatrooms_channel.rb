@@ -11,6 +11,10 @@ class ChatroomsChannel < ApplicationCable::Channel
     MessageRelayJob.perform_later data
   end
 
+  def add(data)
+    stream_from "chatrooms:#{data['chatroom_id']}"
+  end
+
   def unsubscribed
     stop_all_streams
   end

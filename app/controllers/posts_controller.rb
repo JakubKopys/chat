@@ -58,7 +58,7 @@ before_action :find_user_and_post, only: [:show, :edit, :destroy, :update]
   def like
     @post = Post.find(params[:id])
     @user = current_user
-    if @like = Like.find_by(likeable: @post, user: @user)
+    if @like = Like.where(likeable: @post, user: @user).first
       @like.destroy
       respond_to do |format|
         format.html {

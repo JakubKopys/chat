@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   def index
     if params[:friends]
-      @users = User.find(params[:friends]).unaccepted_friends
+      @users = User.includes(:requested_friendships).find(params[:friends]).unaccepted_friends
     else
-      @users = User.all
+      @users = User.all.includes(:requested_friendships)
     end
 
     if params[:search]
